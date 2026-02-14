@@ -13,6 +13,8 @@
 
 %-----------------------------------------------------------------------------------USER INTRODUCED PACKAGES BEGINS
 
+\usepackage{url}
+
 
 %-----------------------------------------------------------------------------------USER INTRODUCED PACKAGES ENDS
 
@@ -48,6 +50,8 @@
 \newtheorem*{defn}{Definition}
 
 
+\newcommand{\ImportanceSampleIntegral}{$I = \int_{a}^{b} dx f(x)$}
+
 
 %-----------------------------------------------------------------------------------USER DEFINED COMMANDS/ENVIRONMENTS ENDS
 
@@ -76,9 +80,9 @@
 
 
 
-\title{Numerical Simulation Methods And Their Applications\\ \small Monte Carlo Methods and Applications in Particle-based Systems}
-\author{\StudentName\\ \StudentNumber \\ \phantom{} \\ Department of Mathematics and Statistics \\ University of Reading }
-\date{} % Date
+\title{\textbf{Numerical Simulation Methods And Their Applications}\\ \small \textit{Monte Carlo Methods and Applications in Particle-based Systems}}
+\author{\small \textit{\StudentName}\\ \small \textit{\StudentNumber} \\ \phantom{} \\ \textbf{Department of Mathematics and Statistics} \\ \textit{University of Reading} \\ \includegraphics[width=35mm,scale=0.3]{assets/Reading_shield.png}}
+\date{\today} % Date
 
 
 
@@ -99,7 +103,9 @@
 
 \begin{abstract}
 Please insert your plain language summary (PLS) here. Your PLS should summarize your study including the motivation, methods, results, conclusions and their broader relevance without using jargon so that it is understandable by intelligent adults from outside of your discipline. The PLS should be a single paragraph of no more than 200 words long.
+\vspace{5mm}
 
+This project concerns developing and working with a computer simulation of a particle-based system, particularly using numerical techniques known as Monte Carlo simulations.
 \end{abstract}
 
 %-----------------------------------------------------------------------------------PLAIN LANGUAGE SUMMARY ENDS
@@ -155,6 +161,12 @@ If I want to refer to my first equation later, you can do so in this way: \eqref
 \begin{theorem}
 My first theorem
 \end{theorem}
+
+
+
+\begin{math}
+	$\ImportanceSampleIntegral$
+\end{math}
 
 \subsection{Pseudo-Random Number Generators}
 My first table is given in Table \ref{tab:my_label}.
