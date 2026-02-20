@@ -5,6 +5,8 @@
 - Computational physics, Statistical Mechanics
 - Monte Carlo methods in general, history, Manhattan project etc
 - Implementation of approximation of Pi (to revise C, maybe?)
+    - ~~Python Implementation~~
+    - C / C++ Implementation
 - Importance Sampling, and how to implement
 - Metropolis method
 - Lennard-Jones Liquid

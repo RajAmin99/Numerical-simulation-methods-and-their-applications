@@ -8,9 +8,10 @@
 
 ~~**18 February** - Draft initial deadlines, to be added and edited to~~
 
-**21 February** - Finish Report Structure <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Question 1 <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Start Question 2 (i, ii)
+**21 February** 
+- ~~Finish Report Structure~~ [Completed 20th Feb]
+- Question 1
+- Start Question 2 (i, ii)
 
 **Tutorial** - 25th February
 
