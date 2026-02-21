@@ -41,6 +41,9 @@
 
 > *Draw conclusions and give prospectives of the study.*
 
+## Links, Rough Notes
+
+https://www.cloudflare.com/en-gb/learning/ssl/lava-lamp-encryption/
 
 
 
