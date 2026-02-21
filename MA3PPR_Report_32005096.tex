@@ -52,6 +52,9 @@
 
 \newcommand{\ImportanceSampleIntegral}{$I = \int_{a}^{b} dx f(x)$}
 
+\newcommand{\mycomment}[1]{}
+
+
 
 
 %-----------------------------------------------------------------------------------USER DEFINED COMMANDS/ENVIRONMENTS ENDS
@@ -67,7 +70,7 @@
 \lhead{\normalsize MA3PPR Project Report}
 \chead{}
 \rhead{\normalsize \StudentNumber}
-%\lfoot{\normalsize \textrm{MA3PPR}}
+\lfoot{\normalsize \textrm{MA3PPR}}
 \cfoot{\thepage}
 \rfoot{\Proposer}
 \setlength{\fboxrule}{4pt}\setlength{\fboxsep}{2ex}
@@ -145,6 +148,7 @@ b. I acknowledge the use of \textcolor{red}{[insert AI system(s) and link]} to g
 
 \section{Development Of Computer Simulation Methods}
 
+\mycomment{
 This is my first paragraph of text that is very clear and well written. 
 
 \begin{defn}
@@ -156,51 +160,69 @@ And here my first equation
 \Delta \Psi = 0
 \end{equation}
 
-If I want to refer to my first equation later, you can do so in this way: \eqref{eq:DelPsi} and run \LaTeX\ twice to get the equation number right. 
 
+If I want to refer to my first equation later, you can do so in this way: \eqref{eq:DelPsi} and run \LaTeX\ twice to get the equation number right. 
+}
 
 \newpage
 \section{Monte Carlo Methods}
 
+\mycomment{
 \begin{theorem}
 My first theorem
 \end{theorem}
+}
 
 
-
-\begin{math}
-	$\ImportanceSampleIntegral$
-\end{math}
 
 \subsection{Pseudo-Random Number Generators}
-My first table is given in Table \ref{tab:my_label}.
-\begin{table}[h]
-    \centering
-    \begin{tabular}{c|c}
-    Heading 1 & Heading 2 \\
-    \hline
-       1  & 2 \\
-      3   & 4\\
-      \hline
-    \end{tabular}
-    \caption{Caption}
-    \label{tab:my_label}
-\end{table}
+Random number generation is an important part of Monte Carlo methods. 
+There are multiple different methods to obtaining random numbers, but the method we are focusing on within this report are called \textbf{Pseudo-Random Number Generators} (PRNGs).
+While they do not generate "actual" random numbers, the ones that they generate are sufficient enough in variability so that they can be used in scenarios where random numbers are needed.
 
-\subsubsection{One}
-My first figure is given in Fig.~\ref{fig:my_label}.
-\begin{figure}
-    \centering
+The way that they achieve this is through the use of mathematical formulae, varying in levels of complexity. The algorithms can get increasingly complex, yet the simplest can consist of only a few lines of code utilising basic mathematical arithmetic.
+Sequences are generated which attempt to approximate random numbers, based on an initial starting \textit{seed}.
+
+While humans can not predict the next number in the sequences that are generated, this is not as computationally secure. This is because if the initial \textit{seed state} is known, an identical sequence can be reproduced.
+Therefore, the sequences are deterministic and not as unpredictable as using systems with true chaos built in (such as radioactive atom decay, or, famously, \textit{Cloudflare}'s wall of lava lamps).
+
+\mycomment{
+%My first table is given in Table \ref{tab:my_label}.
+%\begin{table}[h]
+%    \centering
+%    \begin{tabular}{c|c}
+%    Heading 1 & Heading 2 \\
+%    \hline
+%       1  & 2 \\
+%      3   & 4\\
+%      \hline
+%    \end{tabular}
+%    \caption{Caption}
+%    \label{tab:my_label}
+%\end{table}
+}
+
+
+
+\subsubsection{Mersenne Twister}
+
+%My first figure is given in Fig.~\ref{fig:my_label}.
+%\begin{figure}
+%    \centering
 %    \includegraphics[width=0.8\textwidth]{MathCartoon.PNG}
 %    \caption[Optional short caption to appear in List of Figures]{Some text about what can be seen in the figure. Then some text about where it is from if you did not make the image yourself. This cartoon is reproduced from \citet{Schafer1980}, Fig.4.}
-    \label{fig:my_label}
-\end{figure}
+%    \label{fig:my_label}
+%\end{figure}
 
-\subsubsection{Two}
+\subsubsection{Well Equidistributed Long-period Linear (WELL)}
 
 \subsection{Sampling Methodology}
 \subsubsection{Simple}
 \subsubsection{Importance}
+\begin{math}
+	$\ImportanceSampleIntegral$
+\end{math}
+
 
 \subsection{Statistical Mechanics}
 
