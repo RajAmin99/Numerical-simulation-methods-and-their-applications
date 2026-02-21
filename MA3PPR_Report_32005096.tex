@@ -14,7 +14,7 @@
 %-----------------------------------------------------------------------------------USER INTRODUCED PACKAGES BEGINS
 
 \usepackage{url}
-
+\usepackage{ulem}
 
 %-----------------------------------------------------------------------------------USER INTRODUCED PACKAGES ENDS
 
@@ -50,7 +50,10 @@
 \newtheorem*{defn}{Definition}
 
 
-\newcommand{\ImportanceSampleIntegral}{$I = \int_{a}^{b} dx f(x)$}
+\newcommand{\ImportanceSampleIntegral}{$I = \int_{a}^{b}\  f(x)\ dx$}
+
+\newcommand{\multicomment}[1]{} % Multi-line comment
+
 
 
 
@@ -67,7 +70,7 @@
 \lhead{\normalsize MA3PPR Project Report}
 \chead{}
 \rhead{\normalsize \StudentNumber}
-%\lfoot{\normalsize \textrm{MA3PPR}}
+\lfoot{\normalsize \textrm{MA3PPR}}
 \cfoot{\thepage}
 \rfoot{\Proposer}
 \setlength{\fboxrule}{4pt}\setlength{\fboxsep}{2ex}
@@ -82,7 +85,7 @@
 
 
 \title{\textbf{Numerical Simulation Methods And Their Applications}\\ \small \textit{Monte Carlo Methods and Applications in Particle-based Systems}}
-\author{\small {\StudentName}\\ \small {\StudentNumber} \\ \phantom{} \\ \textbf{Department of Mathematics and Statistics} \\ \textit{University of Reading} \\ \includegraphics[width=35mm,scale=0.3]{assets/Reading_shield.png}}
+\author{\small {\StudentName}\\ \small {\StudentNumber} \\ \phantom{} \\ \\ \\ \\ \\ \textbf{Department of Mathematics and Statistics} \\ \textit{University of Reading} \\ \includegraphics[width=35mm,scale=0.3]{assets/Reading_shield.png}}
 \date{\today} % Date
 
 
@@ -97,14 +100,14 @@
 	
 \begin{document}
 
+
 \maketitle
+\vspace{30mm}
 
 
 %-----------------------------------------------------------------------------------PLAIN LANGUAGE SUMMARY BEGINS
-
 \begin{abstract}
 % Please insert your plain language summary (PLS) here. Your PLS should summarize your study including the motivation, methods, results, conclusions and their broader relevance without using jargon so that it is understandable by intelligent adults from outside of your discipline. The PLS should be a single paragraph of no more than 200 words long.
-% \vspace{5mm}
 
 This project concerns working with a computer simulation of a particle-based system, particularly using numerical techniques known as Monte Carlo simulations.
 \vspace{1mm}
@@ -123,19 +126,26 @@ It starts with an introduction to the history of these methods, touching upon th
 I certify that this is my own work and that use of material from other sources has been properly and fully acknowledged in the text. I have read the University’s definition of plagiarism and the department’s advice on good academic practice. I understand that the consequence of committing plagiarism, if proven and in the absence of mitigating circumstances may include failure in the Year or Part or removal from the membership of the University. I also certify that neither this piece of work, nor any part of it, has been submitted in connection with another assessment.
 
 %Please edit text in square brackets as appropriate 
-In submitting this work I can confirm that I \textcolor{red}{[have/have not]} used Generative AI Tools to prepare and complete my assignment.  
+In submitting this work I can confirm that I \textcolor{red}{\sout{[have/}have not]} used Generative AI Tools to prepare and complete my assignment.  
 
-%Where you have used Generative AI Tools to prepare and complete work, please one select the following statements:
-
-a. I acknowledge the use of \textcolor{red}{[insert AI system(s) and link]} to generate materials to support my research and understanding on the topic when drafting this assignment, but none of the outputs are included in the final version. 
-
-b. I acknowledge the use of \textcolor{red}{[insert AI system(s) and link]} to generate materials that were included within my final assessment in modified form. I have taken responsibility to ensure that where generated materials are included, these have been referenced appropriately, in accordance with the requirements of the assignment brief. 
-
+%Where you have used Generative AI Tools 
+to prepare and complete work, please one select the following statements:
+\\
+\xout{
+a. I acknowledge the use of \textcolor{red}{[]} to generate materials to support my research and understanding on the topic when drafting this assignment, but none of the outputs are included in the final version. 
+}
+\\
+\\
+\xout{
+b. I acknowledge the use of \textcolor{red}{[]} to generate materials that were included within my final assessment in modified form. I have taken responsibility to ensure that where generated materials are included, these have been referenced appropriately, in accordance with the requirements of the assignment brief. 
+}
 %----------DECLARATION ENDS-----------------------------------------------
 \newpage
 
 \tableofcontents
+\newpage
 \listoftables
+\vspace*{0.5\textheight}
 \listoffigures
 
 \newpage
@@ -144,7 +154,11 @@ b. I acknowledge the use of \textcolor{red}{[insert AI system(s) and link]} to g
 
 
 \section{Development Of Computer Simulation Methods}
+\subsection{The Manhattan Project}
+\subsection{Stanisław Ulam, Von Neumann and Metropolis}
+\subsection{Subsequent Developments}
 
+\multicomment{
 This is my first paragraph of text that is very clear and well written. 
 
 \begin{defn}
@@ -156,51 +170,69 @@ And here my first equation
 \Delta \Psi = 0
 \end{equation}
 
-If I want to refer to my first equation later, you can do so in this way: \eqref{eq:DelPsi} and run \LaTeX\ twice to get the equation number right. 
 
+If I want to refer to my first equation later, you can do so in this way: \eqref{eq:DelPsi} and run \LaTeX\ twice to get the equation number right. 
+}
 
 \newpage
 \section{Monte Carlo Methods}
 
+\multicomment{
 \begin{theorem}
 My first theorem
 \end{theorem}
+}
 
 
-
-\begin{math}
-	$\ImportanceSampleIntegral$
-\end{math}
 
 \subsection{Pseudo-Random Number Generators}
-My first table is given in Table \ref{tab:my_label}.
-\begin{table}[h]
-    \centering
-    \begin{tabular}{c|c}
-    Heading 1 & Heading 2 \\
-    \hline
-       1  & 2 \\
-      3   & 4\\
-      \hline
-    \end{tabular}
-    \caption{Caption}
-    \label{tab:my_label}
-\end{table}
+Random number generation is an important part of Monte Carlo methods. 
+There are multiple different methods to obtaining random numbers, but the algorithms we are focusing on within this report are called \textbf{Pseudo-Random Number Generators} (PRNGs).
+While they do not generate "actual" random numbers, what they generate is sufficient enough in variability that it can be used in scenarios where random numbers are needed.
 
-\subsubsection{One}
-My first figure is given in Fig.~\ref{fig:my_label}.
-\begin{figure}
-    \centering
+The way that they achieve this is through the use of mathematical formulae, varying in levels of complexity. The algorithms can get increasingly elaborate, yet the simplest can consist of only a few lines of code utilising basic mathematical arithmetic.
+Sequences are generated which attempt to approximate random numbers, based on an initial starting \textit{seed}.
+
+While humans can not predict the next number in the sequences that are generated, this is not perfectly computationally secure. This is because if the initial \textit{seed state} is known, an identical sequence can be reproduced.
+Therefore, the sequences are deterministic and not as unpredictable as systems with true chaos built into them - such as radioactive atom decay, or, famously, \textit{Cloudflare}'s wall of lava lamps \citep{CloudflareLF17}.
+
+\multicomment{
+%My first table is given in Table \ref{tab:my_label}.
+%\begin{table}[h]
+%    \centering
+%    \begin{tabular}{c|c}
+%    Heading 1 & Heading 2 \\
+%    \hline
+%       1  & 2 \\
+%      3   & 4\\
+%      \hline
+%    \end{tabular}
+%    \caption{Caption}
+%    \label{tab:my_label}
+%\end{table}
+}
+
+
+
+\subsubsection{Mersenne Twister}
+
+%My first figure is given in Fig.~\ref{fig:my_label}.
+%\begin{figure}
+%    \centering
 %    \includegraphics[width=0.8\textwidth]{MathCartoon.PNG}
 %    \caption[Optional short caption to appear in List of Figures]{Some text about what can be seen in the figure. Then some text about where it is from if you did not make the image yourself. This cartoon is reproduced from \citet{Schafer1980}, Fig.4.}
-    \label{fig:my_label}
-\end{figure}
+%    \label{fig:my_label}
+%\end{figure}
 
-\subsubsection{Two}
+\subsubsection{Well Equidistributed Long-period Linear (WELL)}
 
 \subsection{Sampling Methodology}
 \subsubsection{Simple}
 \subsubsection{Importance}
+\begin{math}
+	$\ImportanceSampleIntegral$
+\end{math}
+
 
 \subsection{Statistical Mechanics}
 
@@ -226,14 +258,11 @@ My first figure is given in Fig.~\ref{fig:my_label}.
 \bibliographystyle{agsm} % this gives Harvard style references
 \bibliography{Bibliography} % change to the name of your .bib file
 
-\nocite{Frenkel96}
-\nocite{Kopka99}
-\nocite{Gentle03}
-\nocite{Sharma23}
-\nocite{Wang18}
+\nocite{*}
 
 
 %------------------------------Uncomment if you need an appendix
+\multicomment{
 \newpage
 \begin{appendix}
 \section{Appendix A - Generative AI Tools}
@@ -284,5 +313,5 @@ chatgpt.com
 \subsubsection{How I modified this material }
 I used my own data. I modified the axis labels and title to be specific to my data. 
 \end{appendix}
-
+}
 \end{document}
