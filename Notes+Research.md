@@ -6,9 +6,10 @@
 - Monte Carlo methods in general, history, Manhattan project etc
 - Pseudo-Random Number Generators
     - Mersenne Twister?
-- Implementation of approximation of Pi (to revise C, maybe?)
+    - WELL / 
+- ~~Implementation of approximation of Pi (to revise C, maybe?)~~
     - ~~Python Implementation~~
-    - C / C++ Implementation
+    - ~~C / C++ Implementation~~
 - Importance Sampling, and how to implement
 - Metropolis method
 - Lennard-Jones Liquid
