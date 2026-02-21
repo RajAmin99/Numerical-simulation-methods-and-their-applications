@@ -23,7 +23,7 @@ def main():
     plt.ylabel("y")
     
     plt.suptitle(f"Estimate of Pi: {estimatePi(samples)}", fontsize = 18)
-    plt.title("Graphical Representation May Not Match Estimate Calculation", fontsize = 10)
+    plt.title("Graphical Representation Is Independent To Estimate Calculation", fontsize = 10)
     plt.show()
 
 if __name__ == "__main__":

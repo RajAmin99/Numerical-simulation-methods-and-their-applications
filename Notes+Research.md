@@ -4,6 +4,8 @@
 
 - Computational physics, Statistical Mechanics
 - Monte Carlo methods in general, history, Manhattan project etc
+- Pseudo-Random Number Generators
+    - Mersenne Twister?
 - Implementation of approximation of Pi (to revise C, maybe?)
     - ~~Python Implementation~~
     - C / C++ Implementation
