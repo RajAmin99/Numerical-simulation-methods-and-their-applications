@@ -5,7 +5,7 @@
 - Computational physics, Statistical Mechanics
 - Monte Carlo methods in general, history, Manhattan project etc
 - Pseudo-Random Number Generators
-    - Mersenne Twister?
+    - Mersenne Twister? / GO SIMPLER
     - WELL / 
 - ~~Implementation of approximation of Pi (to revise C, maybe?)~~
     - ~~Python Implementation~~
@@ -21,6 +21,11 @@
 1.  [5 Marks]
 
    >*Write a brief review about the development of computer simulation methods, starting from the Monte Carlo method developed in the Manhattan Project to later development of MC and MD methods with the enhanced computational power.*
+
+    The first concepts of Monte Carlo simulations can be found in the 18th century, contained within a report found in the 1733 edition of "Histoire de L'Académie Royale des Sciences". This report - created by Georges Louis Leclerc, Comte de Buffon - makes mention of an approximation of pi by throwing needles or rods atop a floor of boards, measuring the fractions that fell on a single board. Of course, this can be recreated in the modern day by a simulation of approximating pi using many points. When initially proposed in this report, the field of Monte Carlo methods had not been distinctly named or partitioned.
+
+    The first computer used for Monte Carlo Simulations was an analog model named the 'Fermiac' 
+    (D. P. Landau, 2021).
 
 2.  [10 Marks]
 
