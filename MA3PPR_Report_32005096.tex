@@ -157,7 +157,10 @@ b. I acknowledge the use of \textcolor{red}{[]} to generate materials that were 
 
 \section{Development Of Computer Simulation Methods}
 
-The first concepts of Monte Carlo simulations can be found in the 18th century, contained within a report found in the 1733 edition of "Histoire de L'Académie Royale des Sciences". This report - created by Georges Louis Leclerc, Comte de Buffon - makes mention of an approximation of pi by throwing needles or rods atop a floor of boards, measuring the fractions that fell on a single board. Of course, this can be recreated in the modern day by a simulation of approximating pi using many points. When initially proposed in this report, the field of Monte Carlo methods had not been distinctly named or partitioned.
+The first concepts of Monte Carlo simulations can be found in the 18th century, contained within a report found in the 1733 edition of 'Histoire de L'Académie Royale des Sciences'.
+This report - created by Georges Louis Leclerc, Comte de Buffon - makes mention of an approximation of pi by throwing needles or rods atop a floor of boards, measuring the fractions that fell on a single board.
+Of course, this can be recreated in the modern day by a simulation of approximating pi using many points.
+When initially proposed in this report, the field of Monte Carlo methods had not been distinctly named or partitioned. \citep{Landau21}
 
     \subsection{The Manhattan Project}
         \subsubsection{Background}
@@ -168,7 +171,11 @@ The first concepts of Monte Carlo simulations can be found in the 18th century, 
             Disregarding moral arguments concerning atomic weaponry, a large factor in the awe of the project was the pure advancement in scientific knowledgement - 
             building upon previous discoveries of fission.
         \subsubsection{Stanisław Ulam, Von Neumann and Metropolis}
-            
+            Stanisław Ulam was prominent in contributing to the founding of Monte Carlo Methods as a designated methodology.
+            Famously, Ulam thought up the concept while recovering in a hospital from surgery. He had been playing solitaire to pass the time and wondered whether the probability of success could be estimated statistically.
+            Rather than approaching the problem from a combinatorial approach (which he had already tried and found unsuccessful) he begun to think more "abstractly" - he had realised that he could simply observe successive games and note outcomes.
+            Crucially for Stanisław Ulam, this could be extended to many simulated trials with the recent advent of computers - which would yield increasingly accurate estimates. \citep{Eckhardt87}
+
         \subsubsection{Subsequent Developments}
 
 \multicomment{
@@ -252,11 +259,14 @@ Therefore, the sequences are deterministic and not as unpredictable as systems w
 \subsection{The Metropolis Method}
 
 \newpage
-\section{Question 3? Lennard-Jones ?}
+\section{The Lennard-Jones Potential}
 
 \newpage
 \section{Practical Application in a Numerical Simulation}
 \subsection{Code and development}
+Code was inspired by \textbf{Fortran} code from 'Understanding Molecular Simulation' by Daan Frenkel and Berend Smit \citep{Frenkel96}.
+This was adapted and rewritten by me into \textbf{C++}.
+The program can be found in the appendix of this report.
 \subsection{Application to a Lennard-Jones liquid}
 \subsubsection{Numerical Analysis}
 
@@ -275,9 +285,10 @@ Therefore, the sequences are deterministic and not as unpredictable as systems w
 
 
 %------------------------------Uncomment if you need an appendix
-\multicomment{
 \newpage
 \begin{appendix}
+
+\multicomment{
 \section{Appendix A - Generative AI Tools}
 If you use Generative AI tools to help with your project you need to take three steps to properly acknowledge your use of these tools.
 \begin{description}
@@ -325,6 +336,7 @@ chatgpt.com
 
 \subsubsection{How I modified this material }
 I used my own data. I modified the axis labels and title to be specific to my data. 
-\end{appendix}
 }
+
+\end{appendix}
 \end{document}

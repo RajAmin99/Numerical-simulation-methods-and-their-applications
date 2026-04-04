@@ -5,6 +5,8 @@ int initialisation() {
     
     // Particle Placement
 
+
+    return 0
 }
 
 void mcmove() {

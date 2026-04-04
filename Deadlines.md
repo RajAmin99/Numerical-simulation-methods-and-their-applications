@@ -28,7 +28,7 @@
 > First Week (End 22nd):<br>
 >    * Collect Further/Final research
 >    * Finish Chapter 1, 2, 3
->    * Start programming Simulation
+>    * ~~Start programming Simulation~~
  
 > Second Week (End 29th):<br>
 >    * Finish Chapter 4, 5, 6
