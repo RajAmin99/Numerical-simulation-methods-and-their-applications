@@ -208,31 +208,35 @@ When initially proposed in this report, the field of Monte Carlo methods had not
 \newpage
 \section{Monte Carlo Methods}
 
-\subsection{Pseudo-Random Number Generators}
-Random number generation is an important part of Monte Carlo methods. 
-There are multiple different methods to obtaining random numbers, but the algorithms we are focusing on within this report are called \textbf{Pseudo-Random Number Generators} (PRNGs).
-While they do not generate "actual" random numbers, what they generate is sufficient enough in variability that it can be used in scenarios where random numbers are needed.
+    \subsection{Pseudo-Random Number Generators}
+        Random number generation is an important part of Monte Carlo methods. 
+        There are multiple different methods to obtaining random numbers, but the algorithms we are focusing on within this report are called \textbf{Pseudo-Random Number Generators} (PRNGs).
+        While they do not generate "actual" random numbers, what they generate is sufficient enough in variability that it can be used in scenarios where random numbers are needed.
 
-The way that they achieve this is through the use of mathematical formulae, varying in levels of complexity. The algorithms can get increasingly elaborate, yet the simplest can consist of only a few lines of code utilising basic mathematical arithmetic.
-Sequences are generated which attempt to approximate random numbers, based on an initial starting \textit{seed}.
+        The way that they achieve this is through the use of mathematical formulae, varying in levels of complexity. The algorithms can get increasingly elaborate, yet the simplest can consist of only a few lines of code utilising basic mathematical arithmetic.
+        Sequences are generated which attempt to approximate random numbers, based on an initial starting \textit{seed} \citep{Gentle03}.
 
-While humans can not predict the next number in the sequences that are generated, this is not perfectly computationally secure. This is because if the initial \textit{seed state} is known, an identical sequence can be reproduced.
-Therefore, the sequences are deterministic and not as unpredictable as systems with true chaos built into them - such as radioactive atom decay, or, famously, \textit{Cloudflare}'s wall of lava lamps \citep{CloudflareLF17}.
+        While humans can not predict the next number in the sequences that are generated, this is not perfectly computationally secure. This is because if the initial \textit{seed state} is known, an identical sequence can be reproduced.
+        Therefore, the sequences are deterministic and not as unpredictable as systems with true chaos built into them - such as radioactive atom decay, or, famously, \textit{Cloudflare}'s wall of lava lamps \citep{CloudflareLF17}.
 
 
-\subsubsection{Linear Congruential Generator (LCG)}
-    One such example, albeit a simple one, is the Linear Congruential Generator.
+        \subsubsection{Linear Congruential Generator (LCG)}
+            One such example, albeit a simple one, is the Linear Congruential Generator.
 
-\[
-    \LCGenerator
-\]
+                \[
+                    \LCGenerator
+                \]
 
-\subsubsection{Mersenne Twister}
-    The Mersenne Twister is a more complex, modern PRNG developed in 1997 by mathematicians Makoto Matsumoto and Takuji Nishimura.
+        \subsubsection{Mersenne Twister}
+            The Mersenne Twister is a more complex, modern PRNG developed in 1997 \citep{Matsumoto98}.
+            
+            It derives its name from a prime number known as a Mersenne Prime, which contributes to its period. As its period is sufficiently large, the algorithm is highly optimised,
+            and the numbers generated have low correlations, the Mersenne Twister is a prominent PRNG that is used across industry.
+            Most notably, it is used in scientific simulations (Monte Carlo methods, as discussed) but also within Machine Learning, statistical sampling and also video game graphics \citep{Samadov24}. 
 
-\subsection{Sampling Methodology}
-\subsubsection{Simple}
-\subsubsection{Importance}
+    \subsection{Sampling Methodology}
+        \subsubsection{Simple}
+        \subsubsection{Importance}
 
 \[
 	\ImportanceSampleIntegral
