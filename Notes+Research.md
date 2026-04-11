@@ -51,7 +51,10 @@
 
 https://www.cloudflare.com/en-gb/learning/ssl/lava-lamp-encryption/
 
+*CODE:*
+https://ccl.northwestern.edu/netlogo/models/MonteCarloLennard-Jones
 
+https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/Sample%20Models/Chemistry%20&%20Physics/Materials%20Science/Monte%20Carlo%20Lennard-Jones.nlogox
 
 
 
