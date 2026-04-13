@@ -77,7 +77,7 @@
 \newcommand{\ImportanceSampleIntegral}{I = \int_{a}^{b}\  f(x)\ dx}
 
 % Linear Congruential Generator
-\newcommand{\LCGenerator}{(X_{n+1} = (aX_n + c)\bmod m)}
+\newcommand{\LCGenerator}{x_{i} \equiv(ax_{i-1} + c)\bmod m,\qquad \text{ with }0\leq x_{i}<m;}
 
 % Lennard-Jones Potential
 \newcommand{\LJPotential}{V(r) = 4\varepsilon\Big[\big(\tfrac{\sigma}{r}\big)^{12} - \big(\tfrac{\sigma}{r}\big)^{6}\Big]}
@@ -227,7 +227,7 @@ When initially proposed in this report, the field of Monte Carlo methods had not
 
 
         \subsubsection{Linear Congruential Generator (LCG)}
-            One such example, albeit a simple one, is the Linear Congruential Generator.
+            One such example, albeit a simple one, is the Linear Congruential Generator given in the following form:
 
                 \[
                     \LCGenerator
@@ -268,7 +268,7 @@ When initially proposed in this report, the field of Monte Carlo methods had not
         \begin{itemize}
             \item $V$ indicates the intermolecular potential between particles,
             \item $\varepsilon$ is the well depth: the maximum strength of attractive force and minimum energy value
-            \item 
+            \item $\sigma$ 
         \end{itemize}
 
         \subsubsection{Sketching The Potential}
