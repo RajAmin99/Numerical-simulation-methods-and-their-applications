@@ -138,7 +138,9 @@
 This project concerns working with a computer simulation of a particle-based system, particularly using numerical techniques known as Monte Carlo simulations.
 \vspace{3mm}
 
-It starts with an introduction to the history of these methods, touching upon the infamous Manhattan Project, then focusing on pseudo-random number generators, sampling methodologies, and their applications in statistical mechanics. The project also explores the Metropolis method and its application to a Lennard-Jones liquid. Finally, it concludes with findings of a simulation created from individually developed C++ code.
+It starts with an introduction to the history of these methods, touching upon the Manhattan Project, then focusing on pseudo-random number generators, sampling methodologies, and their applications in statistical mechanics.
+The project also explores the Metropolis method and its application to a Lennard-Jones liquid.
+Finally, it concludes with findings of a simulation created from individually developed C++ code.
 \vspace{3mm}
 
 These findings are
@@ -186,7 +188,7 @@ b. I acknowledge the use of \textcolor{red}{[]} to generate materials that were 
 
 The first concepts of Monte Carlo simulations can be found in the 18th century, contained within a report found in the 1733 edition of `Histoire de L'Académie Royale des Sciences`.
 This report - created by Georges Louis Leclerc, Comte de Buffon - makes mention of an approximation of pi by throwing needles or rods atop a floor of boards, measuring the fractions that fell on a single board.
-Of course, this can be recreated in the modern day by a simulation of approximating pi using many points.
+Of course, this can be recreated in the modern day by a simulation of approximating pi using many points (see Appendix B).
 When initially proposed in this report, the field of Monte Carlo methods had not been distinctly named or partitioned.\citep{Landau21}
 
     \subsection{The Manhattan Project}
@@ -288,7 +290,7 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             My code was built on a framework of \textbf{Fortran} code from 'Understanding Molecular Simulation' by Daan Frenkel and Berend Smit \citep{Frenkel96}.
             Another Monte Carlo simulation of the Lennard-Jones model \citep{Kelter15}, packaged within a library known as NetLogo \citep{Wilensky99}, also provided much guidance and inspiration.
             These were adapted and rewritten from scratch, by me, into \textbf{C++}.
-            My program can be found in the appendix of this report.
+            My program can be found in the appendix of this report (see Appendix A).
     \subsection{Application to a Lennard-Jones liquid}
         \subsubsection{Numerical Analysis}
 
@@ -312,7 +314,13 @@ When initially proposed in this report, the field of Monte Carlo methods had not
 \begin{appendix}
 
     \section{Monte Carlo C++ Code}
-    \lstinputlisting{ParticleSimulation/src/main.cpp}
+    \lstinputlisting[title=\lstname]{ParticleSimulation/src/main.cpp}
+
+    \newpage
+    \section{Approximation of Pi in Python, Using Monte Carlo Techniques}
+    \lstinputlisting[title=\lstname]{ApproximationOfPi/src/python/SimpleImplementation.py}
+    \newpage
+    \lstinputlisting[title=\lstname]{ApproximationOfPi/src/python/GraphicalRepresentation.py}
 
 \end{appendix}
 
