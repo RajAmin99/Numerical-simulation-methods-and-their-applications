@@ -1,5 +1,7 @@
 #! python3
-
+"""
+Graphical representation of approximation of Pi using Monte Carlo methods.
+"""
 import matplotlib.pyplot as plt
 import numpy as np
 
