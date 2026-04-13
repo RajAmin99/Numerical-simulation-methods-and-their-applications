@@ -1,3 +1,4 @@
+#! python3
 """
 Simple implementation of approximation of pi.
 
