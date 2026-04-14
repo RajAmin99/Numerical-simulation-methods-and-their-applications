@@ -30,6 +30,5 @@ if __name__ == "__main__":
     print(f"Estimate with 1000 Sample:\n{estimatePi(1_000)}\n")
     print(f"Estimate with 10,000 Sample:\n{estimatePi(10_000)}\n")
     print(f"Estimate with 1,000,000 Sample:\n{estimatePi(1_000_000)}\n")
-    print(f"Estimate with 50,000,000 Sample:\n{estimatePi(50_000_000)}\n")
         
         
