@@ -3,9 +3,9 @@
 ## Possible Checklist (in order)
 
 - Computational physics, Statistical Mechanics
-- Monte Carlo methods in general, history, Manhattan project etc
+~~- Monte Carlo methods in general, history, Manhattan project etc~~
 - Pseudo-Random Number Generators
-    - Mersenne Twister? / GO SIMPLER
+    ~~- Mersenne Twister? / GO SIMPLER~~
     - WELL / 
 - ~~Implementation of approximation of Pi (to revise C, maybe?)~~
     - ~~Python Implementation~~
