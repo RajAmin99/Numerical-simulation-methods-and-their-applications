@@ -173,9 +173,9 @@ b. I acknowledge the use of \textcolor{red}{[]} to generate materials that were 
 \newpage
 
 \tableofcontents
-\newpage
+\vspace*{0.05\textheight}
 \listoftables
-\vspace*{0.5\textheight}
+\vspace*{0.15\textheight}
 \listoffigures
 
 \newpage
@@ -204,17 +204,13 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             Famously, Ulam thought up the concept while recovering in a hospital from surgery. He had been playing solitaire to pass the time and wondered whether the probability of success could be estimated statistically.
             Rather than approaching the problem from a combinatorial approach (which he had already tried and found unsuccessful) he begun to think more 'abstractly' - he had realised that he could simply observe successive games and note outcomes.
             Crucially for Stanisław Ulam, this could be extended to many simulated trials with the recent advent of computers - which would yield increasingly accurate estimates. \citep{Eckhardt87}
-
         \subsubsection{Subsequent Developments}
-            % DEVELOP FURTHER
-            % At first, this new method was used in atomic simulations, particularly to assist in the development of the hydrogen bomb. 
-            % As computational capabilities developed, it was rapidly adopted and applied to many other fields, such as computational finance.
-            The link between Ulam's proposed ideas and the following adoption of the statistical approach was a man named Von Neumann.
+            The link between Ulam's proposed ideas and the following adoption of the statistical approach was a man named John Von Neumann.
             Perhaps most well-known for his invention of the aptly named Von Neumann architecture (in which programs are stored within a computer much like the data these programs use),
             he provided the link to the ENIAC - the world’s first programmable, electronic digital computer.
             Von Neumann's computations, refined together with colleagues at Los Alamos laboratory, became the first calculations run on the ENIAC after it had been upgraded to a stored-program paradigm.
-            Nowadays, the computer industry has grown exponentially, and though statistical sampling had already been used in the past, Ulam's thoughts paved the way for the Monte Carlo method to dominate complex statistical problems.
-            \citep{Summerscales23}
+            Nowadays, the computer industry has grown exponentially, and though statistical sampling had already been used in the past, Ulam's thoughts paved the way for the Monte Carlo method to dominate complex statistical problems \citep{Summerscales23}.             
+
 
 
 
@@ -243,6 +239,7 @@ When initially proposed in this report, the field of Monte Carlo methods had not
 
             As can be seen, the equation consists of a simple linear function followed by a modular reduction.
             Although this may not produce sufficiently long streams of random numbers, and the numbers may not appear to be very random themselves, the Linear Congruential Generator and its alternative forms create the basis of many more powerful PRNGs.
+            These alternative forms are built by modifying certain elements, for example setting $c = 0$ (yielding something known as the Multiplicative Congruential Generator)
 
             Here,
             \begin{itemize}
@@ -258,24 +255,39 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             \newpage
             \subsubsection{Linear Congruential Generator Example}
             Following is an example of a LCG displayed in a `truth table', allowing the process to be broken down into small, simple, and visible steps.
-            The values that this LCG takes is % m = ?, a = ?, c = ?, X_0 = ?
+            Traditionally, values of $m$ are usually a power of 2 as this is easier for the computer to use during calculation. Due to this, I have chosen $m\; =\; 2^5\; = 32$ which is smaller than a typical usecase. 
+            The other values that this LCG will take are $a\: =\: 5,\; c\: =\: 7,\; X_0\: =\: 19$, which have been arbitrarily selected.
+
             \begin{center}
-            \begin{tabular}{||c c c c||} 
+            \addcontentsline{lot}{table}{Linear Congruential Generator Example}
+            \begin{tabular}{|| c || c || c |||| c ||} 
             \hline
-            $X_{n+1}$ & $= aX_{n}$ & $+ c$ & $( \bmod\; m)$ \\ [0.5ex] 
+            $aX_{n}$ & $+\; c$ & $( \bmod\; m)$ & $=\; X_{n+1}$ \\ [0.5ex] 
             \hline\hline
-            ? & ? & ? & ? \\ 
+            $(5 * 19)\: =\: 95$ & $(95 + 7)\: =\: 102$ & $102\: (\bmod\: 32)$ & $\: =\: 6$ \\ 
             \hline
-            ? & ? & ? & ? \\
+            $(5 * 6)\: =\: 30$ & $(30 + 7)\: =\: 37$ & $37\: (\bmod\: 32)$ & $\: =\: 5$ \\ 
             \hline
-            ? & ? & ? & ? \\
+            $(5 * 5)\: =\: 25$ & $(25 + 7)\: =\: 32$ & $32\: (\bmod\: 32)$ & $\: =\: 0$ \\ 
             \hline
-            ? & ? & ? & ? \\
+            $(5 * 0)\: =\: 0$ & $(0 + 7)\: =\: 7$ & $7\: (\bmod\: 32)$ & $\: =\: 7$ \\ 
             \hline
-            ? & ? & ? & ? \\ [1ex] 
+            $(5 * 7)\: =\: 35$ & $(35 + 7)\: =\: 42$ & $42\: (\bmod\: 32)$ & $\: =\: 10$ \\ 
+            \hline
+            $(5 * 10)\: =\: 50$ & $(50 + 7)\: =\: 57$ & $57\: (\bmod\: 32)$ & $\: =\: 25$ \\ 
+            \hline
+            $(5 * 25)\: =\: 125$ & $(125 + 7)\: =\: 132$ & $132\: (\bmod\: 32)$ & $\: =\: 4$ \\ 
             \hline
             \end{tabular}
             \end{center}
+
+            From the table, we can see that for the Linear Congruential Generator $5X_{n}+7\: (\bmod\: 2^5)$, the starting seed of $X_{0} = 19$ provides a sequence of: $6, 5, 0, 7, 10, 25, 4\cdots$.
+            
+            Following this, the sequence continues until it starts to repeat, having a period of 32 (the value of $m$ as stated earlier).
+            The full sequence in its entirety is:
+            \small\[
+            19,6,5,0,7,10,25,4,27,14,13,8,15,18,1,12,3,22,21,16,23,26,9,20,11,30,29,24,31,2,17,28,19,\ldots
+            \]
 
         \subsubsection{The Mersenne Twister}
             The Mersenne Twister is a more complex, modern PRNG developed in 1997 \citep{Matsumoto98}.
