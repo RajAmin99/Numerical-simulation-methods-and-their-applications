@@ -73,11 +73,8 @@
 \lstset{escapechar=@,style=customcpp}
 
 
-% Importance Sample
-\newcommand{\ImportanceSampleIntegral}{I = \int_{a}^{b}\  f(x)\ dx}
-
 % Linear Congruential Generator
-\newcommand{\LCGenerator}{x_{i} \equiv(ax_{i-1} + c)\bmod m,\qquad \text{ with }0\leq x_{i}<m;}
+\newcommand{\LCGenerator}{x_{i} \equiv(ax_{i-1} + c)\bmod m}
 
 % Lennard-Jones Potential
 \newcommand{\LJPotential}{V(r) = 4\varepsilon\Big[\big(\tfrac{\sigma}{r}\big)^{12} - \big(\tfrac{\sigma}{r}\big)^{6}\Big]}
@@ -188,7 +185,7 @@ b. I acknowledge the use of \textcolor{red}{[]} to generate materials that were 
 The first concepts of Monte Carlo simulations can be found in the 18th century, contained within a report found in the 1733 edition of `Histoire de L'Académie Royale des Sciences`.
 This report - created by Georges Louis Leclerc, Comte de Buffon - makes mention of an approximation of pi by throwing needles or rods atop a floor of boards, measuring the fractions that fell on a single board.
 Of course, this can be recreated in the modern day by a simulation of approximating pi using many points (see Appendices A and B).
-When initially proposed in this report, the field of Monte Carlo methods had not been distinctly named or partitioned.\citep{Landau21}
+When initially proposed in this report, the field of Monte Carlo methods had not been distinctly named or partitioned \citep{Landau21}.
 
     \subsection{The Manhattan Project}
         \subsubsection{Background Context}
@@ -203,7 +200,7 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             Stanisław Ulam was prominent in contributing to the founding of Monte Carlo Methods as a designated methodology, during and after his involvement in The Manhattan Project.
             Famously, Ulam thought up the concept while recovering in a hospital from surgery. He had been playing solitaire to pass the time and wondered whether the probability of success could be estimated statistically.
             Rather than approaching the problem from a combinatorial approach (which he had already tried and found unsuccessful) he begun to think more 'abstractly' - he had realised that he could simply observe successive games and note outcomes.
-            Crucially for Stanisław Ulam, this could be extended to many simulated trials with the recent advent of computers - which would yield increasingly accurate estimates. \citep{Eckhardt87}
+            Crucially for Stanisław Ulam, this could be extended to many simulated trials with the recent advent of computers - which would yield increasingly accurate estimates \citep{Eckhardt87}.
         \subsubsection{Subsequent Developments}
             The link between Ulam's proposed ideas and the following adoption of the statistical approach was a man named John Von Neumann.
             Perhaps most well-known for his invention of the aptly named Von Neumann architecture (in which programs are stored within a computer much like the data these programs use),
@@ -224,7 +221,7 @@ When initially proposed in this report, the field of Monte Carlo methods had not
 
         The way that they achieve this is through the use of mathematical formulae, varying in levels of complexity. The algorithms can get increasingly elaborate, yet the simplest can consist of only a few lines of code utilising basic mathematical arithmetic.
         Sequences are generated which attempt to approximate random numbers, based on an initial starting \textit{seed}, and these sequences will eventually repeat after their \textit{period}.
-        For satisfactory generators, these periods will be sufficiently long enough that the repititions are often unreached by realistic samples.
+        For satisfactory generators, these periods will be sufficiently long enough that the repititions are often unreached by realistic samples \citep{Gentle03}.
 
         While humans can not predict the next number in the sequences that are generated, this is not perfectly computationally secure. This is because if the initial \textit{seed state} is known, an identical sequence can be reproduced.
         Therefore, the sequences are deterministic and not as unpredictable as systems with true chaos built into them - such as radioactive atom decay, or, famously, \textit{Cloudflare}'s wall of lava lamps \citep{CloudflareLF17}.
@@ -232,11 +229,9 @@ When initially proposed in this report, the field of Monte Carlo methods had not
 
         \subsubsection{The Linear Congruential Generator (LCG)}
             One such example of a PRNG, albeit possibly the simplest one, is the Linear Congruential Generator given in the following form:
-
                 \[
                     \LCGenerator
                 \]
-
             As can be seen, the equation consists of a simple linear function followed by a modular reduction.
             Although this may not produce sufficiently long streams of random numbers, and the numbers may not appear to be very random themselves, the Linear Congruential Generator and its alternative forms create the basis of many more powerful PRNGs.
             These alternative forms are built by modifying certain elements, for example setting $c = 0$ (yielding something known as the Multiplicative Congruential Generator)
@@ -260,7 +255,8 @@ When initially proposed in this report, the field of Monte Carlo methods had not
 
             \begin{center}
             \addcontentsline{lot}{table}{Linear Congruential Generator Example}
-            \begin{tabular}{|| c || c || c |||| c ||} 
+            \small\textbf{Linear Congruential Generator Example}
+            \normalsize\begin{tabular}{|| c || c || c |||| c ||}
             \hline
             $aX_{n}$ & $+\; c$ & $( \bmod\; m)$ & $=\; X_{n+1}$ \\ [0.5ex] 
             \hline\hline
@@ -281,9 +277,9 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             \end{tabular}
             \end{center}
 
-            From the table, we can see that for the Linear Congruential Generator $5X_{n}+7\: (\bmod\: 2^5)$, the starting seed of $X_{0} = 19$ provides a sequence of: $6, 5, 0, 7, 10, 25, 4\cdots$.
+            From the table, we can see that for the Linear Congruential Generator $5X_{n}+7\; (\bmod\: 2^5)$, the starting seed of $X_{0} = 19$ provides a sequence of: $6, 5, 0, 7, 10, 25, 4\cdots$.
             
-            Following this, the sequence continues until it starts to repeat, having a period of 32 (the value of $m$ as stated earlier).
+            Following this, the sequence continues until it starts to repeat, having a period of 32 (the value of $m$, as stated earlier).
             The full sequence in its entirety is:
             \small\[
             19,6,5,0,7,10,25,4,27,14,13,8,15,18,1,12,3,22,21,16,23,26,9,20,11,30,29,24,31,2,17,28,19,\ldots
@@ -301,9 +297,6 @@ When initially proposed in this report, the field of Monte Carlo methods had not
         \subsubsection{Simple}
         \subsubsection{Importance}
 
-\[
-	\ImportanceSampleIntegral
-\]
 
 
 \subsection{Statistical Mechanics}
@@ -340,12 +333,12 @@ When initially proposed in this report, the field of Monte Carlo methods had not
 \section{Practical Application in a Numerical Simulation}
     \subsection{Code and Development}
         \subsubsection{Steps Toward Implementation}
-
+            
         \subsubsection{Code Origin and Inspiration}
             My code was built on a framework of \textbf{Fortran} code from 'Understanding Molecular Simulation' by Daan Frenkel and Berend Smit \citep{Frenkel96}.
             Another Monte Carlo simulation of the Lennard-Jones model \citep{Kelter15}, packaged within a library known as NetLogo \citep{Wilensky99}, also provided much guidance and inspiration.
             These were adapted and rewritten from scratch, by me, into \textbf{C++}.
-            My program can be found in the appendix of this report (see Appendix B).
+            My program can be found in the appendix of this report (see Appendix C).
     \subsection{Application to a Lennard-Jones liquid}
         \subsubsection{Numerical Analysis}
 
