@@ -77,7 +77,9 @@
 \newcommand{\LCGenerator}{x_{i} \equiv(ax_{i-1} + c)\bmod m}
 
 % Lennard-Jones Potential
-\newcommand{\LJPotential}{V(r) = 4\varepsilon\Big[\big(\tfrac{\sigma}{r}\big)^{12} - \big(\tfrac{\sigma}{r}\big)^{6}\Big]}
+\newcommand{\LJPotential}{V (r) = 4\varepsilon\Big[\big(\tfrac{\sigma}{r}\big)^{12} - \big(\tfrac{\sigma}{r}\big)^{6}\Big]}
+% Lennard-Jones Alternative
+\newcommand{\LJPotentialAlt}{V (r) = \tfrac{A}{r^{12}} - \tfrac{B}{r^{6}}}
 
 
 %-----------------------------------------------------------------------------------USER DEFINED COMMANDS/ENVIRONMENTS ENDS
@@ -99,6 +101,7 @@
 \setlength{\fboxrule}{4pt}\setlength{\fboxsep}{2ex}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\harvardurl}{\textbf{URL:} \url}
 \setlength{\headheight}{16pt} 
 
 %----------------------------------------------------
@@ -294,8 +297,17 @@ When initially proposed in this report, the field of Monte Carlo methods had not
 
     \newpage
     \subsection{Sampling Methodology}
-        \subsubsection{Simple}
+        By `Sampling Methodology', we refer to the way in which Monte Carlo methods are used to sample data points (selections to be respresented within subsequent analysis). 
+        Depending on the context and scenario, different qualities may be prioritised, and this is reflected in the different ways that sampling can occur \citep{Brownlee19}.
+        
+        The `Law of Large Numbers' plays a significant part in these simulations as that allows the sampling that occurs to form a relvant distribution, despite the initial data being random.
+        
+        Simple sampling, also called a `crude monte carlo', is the most direct and rudimentary method of using monte carlo sampling techniques.
+        This entails the collection of completely random observations of a random variable.
+        The aformentioned reliance on the law of large numbers leads to a large enough sample size so that an estimate of the expected value ($E[X]$) can be found \citep{KTH}.
+
         \subsubsection{Importance}
+            Importance sampling is 
 
 
 
@@ -318,29 +330,56 @@ When initially proposed in this report, the field of Monte Carlo methods had not
         \begin{itemize}
             \item $V$ indicates the intermolecular potential between particles,
             \item $\varepsilon$ is the well depth: the maximum strength of attractive force and minimum energy value
-            \item $\sigma$ 
+            \item $\sigma$ is referred to as the \textbf{`van der Waals'} radius, and is a measure of how close two nonbonding particles can get. It measures the distance at which the intermolecular potential between the two particles is zero.
+            \item $r$ indicates distance of separation between both particles, measured from the center of each.
         \end{itemize}
 
+        Sometimes the potential can be rearranged and expressed alternatively as
+        \[
+            \LJPotentialAlt
+        \]
+        in which $A, B$ are equal to $4\varepsilon\sigma^{12}, 4\varepsilon\sigma^{6}$ respectively \citep{Lennard25}.
+
         \subsubsection{Sketching The Potential}
+            \begin{figure}[]
+                \addcontentsline{lof}{figure}{Lennard-Jones Potential Sketch}
 
+              % Hand-drawn Lennard-Potential figure, to be added later  
+            \end{figure}
+
+            % Temporary physical gap, to sketch on printed draft demonstratively
+            \vspace*{0.3\textheight}
+            
         \subsubsection{Applications in Modelling Simple Liquids}
-    
+            When modelling simple liquid simulations, the Lennard-Jones potential is relevant because
     \subsection{Periodic Boundary Conditions}
-
-        \subsubsection{Figure}
+        \begin{figure}
+            \addcontentsline{lof}{figure}{Periodic Boundary Conditions}
+        \end{figure}
+\newpage
+\section{Monte Carlo Simulation: Code And Development}
+    \subsection{Steps Toward Implementation}
+        \subsubsection{Initial Configuration}
+        \subsubsection{Trajectory Generation Loops}
+        \subsubsection{Post-Simulation Data Analysis}
+    \subsection{Code Origin and Inspiration}
+        My code was built on a framework of \textbf{Fortran} code from 'Understanding Molecular Simulation' by Daan Frenkel and Berend Smit \citep{Frenkel96}.
+        Another Monte Carlo simulation of the Lennard-Jones model \citep{Kelter15}, packaged within a library known as NetLogo \citep{Wilensky99}, also provided much guidance and inspiration.
+        These were adapted and rewritten from scratch, by me, into \textbf{C++}.
+        My program can be found in the appendix of this report (see Appendix C).
 
 \newpage
-\section{Practical Application in a Numerical Simulation}
-    \subsection{Code and Development}
-        \subsubsection{Steps Toward Implementation}
-            
-        \subsubsection{Code Origin and Inspiration}
-            My code was built on a framework of \textbf{Fortran} code from 'Understanding Molecular Simulation' by Daan Frenkel and Berend Smit \citep{Frenkel96}.
-            Another Monte Carlo simulation of the Lennard-Jones model \citep{Kelter15}, packaged within a library known as NetLogo \citep{Wilensky99}, also provided much guidance and inspiration.
-            These were adapted and rewritten from scratch, by me, into \textbf{C++}.
-            My program can be found in the appendix of this report (see Appendix C).
-    \subsection{Application to a Lennard-Jones liquid}
-        \subsubsection{Numerical Analysis}
+\section{Application of Code to a Lennard-Jones liquid}
+    \subsection{Total Energy in Plots}
+        \begin{figure}[]
+            \addcontentsline{lof}{figure}{Total Energy of Simulation}
+
+        \end{figure}
+
+    \subsection{Numerical Analysis}
+        \subsubsection{Radial Distribution Function}
+        \subsubsection{Mean-Squared Displacements}
+        \subsubsection{Diffusion Coefficients}
 
 \newpage
 \section{Conclusions, Findings, Prospectives}
@@ -368,7 +407,11 @@ When initially proposed in this report, the field of Monte Carlo methods had not
 
     \newpage
     \section{Approximation of Pi in Python, Code Outputs}
-    % Need to insert outputs from assets folder later
+        \begin{center}
+            \includegraphics{assets/ApproximationOfPi_SimpleImplementation_Output.png}
+        \end{center}
+
+        \includegraphics{assets/ApproximationOfPi_GraphicalRepresentation_Output.png}
 
     \newpage
     \section{Monte Carlo C++ Code}
