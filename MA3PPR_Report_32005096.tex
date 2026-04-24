@@ -143,7 +143,8 @@ The project also explores the Metropolis method and its application to a Lennard
 Finally, it concludes with findings of a simulation created from individually developed C++ code.
 \vspace{3mm}
 
-These findings are
+These findings consist of elements such as total energy within the system,
+and values derived from numerical analysis of the particles, such as (but not limited to) the radial distribution and diffusion coefficients.
 \end{abstract}
 
 %-----------------------------------------------------------------------------------PLAIN LANGUAGE SUMMARY ENDS
@@ -311,17 +312,24 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             If a one-dimensional integral $I$, where $I = \int_{a}^{b}\; dx\; f(x)$, were to be re-written as:
             \[I = (b - a)\; \langle\: f(x)\: \rangle,\]
             this would represent the unweighted average of $f(x)$ over the interval $[a, b]$.
-            As this average is evaluated, larger and larger distributions tending to infinity yield a correct value of $I$.
+            As this average is evaluated, larger and larger distributions tending to infinity yield a correct value of $I$ \citep{Frenkel96}.
+
+            An example of this `crude monte carlo' method can be found in the approximation of Pi mentioned earlier (see Appendices A and B),
+            where uniform and random coordinates are generated within the given square. This results in a calculated average for the value of Pi.
+            This sampling methodology can fall short due to its reliance on randomness; If random values fell unusually within neglibible or heavily influencing areas, the final results of a monte carlo sample can be innacurate - rendering the process inefficient.
+
 
         \subsubsection{Importance}
             Like Simple sampling, Importance sampling is a method of sampling for data values over an interval, however what sets Importance sampling apart is the addition of weighted `importance' to certain selected values (hence the name given to the technique).
-            
+            How this is achieved is through the introduction of a new weight term % Here when figured out %
+            This means that variation is reduced to either insignificant levels, or at best zero, in areas where the distribution may not be relevant to draw samples from.
 
 
 
-\subsection{Statistical Mechanics}
 
-\subsection{The Metropolis Method}
+    \subsection{Statistical Mechanics}
+
+    \subsection{The Metropolis Method}
 
 \newpage
 \section{The Lennard-Jones Potential}
@@ -350,15 +358,9 @@ When initially proposed in this report, the field of Monte Carlo methods had not
         \]
         in which $A, B$ are equal to $4\varepsilon\sigma^{12}, 4\varepsilon\sigma^{6}$ respectively \citep{Lennard25}.
 
-        \subsubsection{Sketching The Potential}
-            \begin{figure}[]
-                \addcontentsline{lof}{figure}{Lennard-Jones Potential Sketch}
-
-              % Hand-drawn Lennard-Potential figure, to be added later  
-            \end{figure}
-
-            % Temporary physical gap, to sketch on printed draft demonstratively
-            \vspace*{0.3\textheight}
+        \subsubsection{Plotting The Potential}
+            \addcontentsline{lof}{figure}{Lennard-Jones Potential Plot}
+            \includegraphics[width = 11cm, height = 11cm, keepaspectratio]{assets/LennardJonesPlot.png}
             
         \subsubsection{Applications in Modelling Simple Liquids}
             When modelling simple liquid simulations, the Lennard-Jones potential is relevant because
@@ -369,6 +371,7 @@ When initially proposed in this report, the field of Monte Carlo methods had not
 \newpage
 \section{Monte Carlo Simulation: Code And Development}
     \subsection{Steps Toward Implementation}
+        \subsubsection{Drawing Together The Theory}
         \subsubsection{Initial Configuration}
         \subsubsection{Trajectory Generation Loops}
         \subsubsection{Post-Simulation Data Analysis}
