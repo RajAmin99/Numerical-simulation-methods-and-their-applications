@@ -15,6 +15,14 @@ void mcmove() {
 
 }
 
+double calc_energy() {
+
+    // Calculation of a Particle's Energy
+
+    double energy = 0.0;
+
+    return energy;
+}
 
 int main() {
 
