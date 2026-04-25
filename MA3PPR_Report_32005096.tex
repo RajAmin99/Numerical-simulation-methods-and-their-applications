@@ -16,6 +16,7 @@
 \usepackage{url}
 \usepackage[normalem]{ulem}
 \usepackage{listings}
+\usepackage{caption}
 
 %-----------------------------------------------------------------------------------USER INTRODUCED PACKAGES ENDS
 
@@ -258,27 +259,26 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             The other values that this LCG will take are $a\: =\: 5,\; c\: =\: 7,\; X_0\: =\: 19$, which have been arbitrarily selected.
 
             \begin{center}
-            \addcontentsline{lot}{table}{Linear Congruential Generator Example}
-            \small\textbf{Linear Congruential Generator Example}
-            \normalsize\begin{tabular}{|| c || c || c |||| c ||}
-            \hline
-            $aX_{n}$ & $+\; c$ & $( \bmod\; m)$ & $=\; X_{n+1}$ \\ [0.5ex] 
-            \hline\hline
-            $(5 * 19)\: =\: 95$ & $(95 + 7)\: =\: 102$ & $102\: (\bmod\: 32)$ & $\: =\: 6$ \\ 
-            \hline
-            $(5 * 6)\: =\: 30$ & $(30 + 7)\: =\: 37$ & $37\: (\bmod\: 32)$ & $\: =\: 5$ \\ 
-            \hline
-            $(5 * 5)\: =\: 25$ & $(25 + 7)\: =\: 32$ & $32\: (\bmod\: 32)$ & $\: =\: 0$ \\ 
-            \hline
-            $(5 * 0)\: =\: 0$ & $(0 + 7)\: =\: 7$ & $7\: (\bmod\: 32)$ & $\: =\: 7$ \\ 
-            \hline
-            $(5 * 7)\: =\: 35$ & $(35 + 7)\: =\: 42$ & $42\: (\bmod\: 32)$ & $\: =\: 10$ \\ 
-            \hline
-            $(5 * 10)\: =\: 50$ & $(50 + 7)\: =\: 57$ & $57\: (\bmod\: 32)$ & $\: =\: 25$ \\ 
-            \hline
-            $(5 * 25)\: =\: 125$ & $(125 + 7)\: =\: 132$ & $132\: (\bmod\: 32)$ & $\: =\: 4$ \\ 
-            \hline
-            \end{tabular}
+                \captionof{table}{\small\textbf{Linear Congruential Generator Example}}
+                \normalsize\begin{tabular}{|| c || c || c |||| c ||}
+                    \hline
+                    $aX_{n}$ & $+\; c$ & $( \bmod\; m)$ & $=\; X_{n+1}$ \\ [0.5ex] 
+                    \hline\hline
+                    $(5 * 19)\: =\: 95$ & $(95 + 7)\: =\: 102$ & $102\: (\bmod\: 32)$ & $\: =\: 6$ \\ 
+                    \hline
+                    $(5 * 6)\: =\: 30$ & $(30 + 7)\: =\: 37$ & $37\: (\bmod\: 32)$ & $\: =\: 5$ \\ 
+                    \hline
+                    $(5 * 5)\: =\: 25$ & $(25 + 7)\: =\: 32$ & $32\: (\bmod\: 32)$ & $\: =\: 0$ \\ 
+                    \hline
+                    $(5 * 0)\: =\: 0$ & $(0 + 7)\: =\: 7$ & $7\: (\bmod\: 32)$ & $\: =\: 7$ \\ 
+                    \hline
+                    $(5 * 7)\: =\: 35$ & $(35 + 7)\: =\: 42$ & $42\: (\bmod\: 32)$ & $\: =\: 10$ \\ 
+                    \hline
+                    $(5 * 10)\: =\: 50$ & $(50 + 7)\: =\: 57$ & $57\: (\bmod\: 32)$ & $\: =\: 25$ \\ 
+                    \hline
+                    $(5 * 25)\: =\: 125$ & $(125 + 7)\: =\: 132$ & $132\: (\bmod\: 32)$ & $\: =\: 4$ \\ 
+                    \hline
+                \end{tabular}
             \end{center}
 
             From the table, we can see that for the Linear Congruential Generator $5X_{n}+7\; (\bmod\: 2^5)$, the starting seed of $X_{0} = 19$ provides a sequence of: $6, 5, 0, 7, 10, 25, 4\cdots$.
@@ -322,10 +322,8 @@ When initially proposed in this report, the field of Monte Carlo methods had not
         \subsubsection{Importance}
             Like Simple sampling, Importance sampling is a method of sampling for data values over an interval, however what sets Importance sampling apart is the addition of weighted `importance' to certain selected values (hence the name given to the technique).
             How this is achieved is through the introduction of a new weight term % Here when figured out %
+            
             This means that variation is reduced to either insignificant levels, or at best zero, in areas where the distribution may not be relevant to draw samples from.
-
-
-
 
     \subsection{Statistical Mechanics}
 
@@ -358,16 +356,19 @@ When initially proposed in this report, the field of Monte Carlo methods had not
         \]
         in which $A, B$ are equal to $4\varepsilon\sigma^{12}, 4\varepsilon\sigma^{6}$ respectively \citep{Lennard25}.
 
-        \subsubsection{Plotting The Potential}
-            \addcontentsline{lof}{figure}{Lennard-Jones Potential Plot}
-            \includegraphics[width = 11cm, height = 11cm, keepaspectratio]{assets/LennardJonesPlot.png}
+        \subsubsection{Displaying The Potential Visually}
+            \begin{center}
+                \includegraphics[width = 11cm, height = 11cm, keepaspectratio]{assets/LennardJonesPlot.png}
+                \captionof{figure}{Lennard-Jones Potential Plot}
+            \end{center}
             
         \subsubsection{Applications in Modelling Simple Liquids}
             When modelling simple liquid simulations, the Lennard-Jones potential is relevant because
     \subsection{Periodic Boundary Conditions}
-        \begin{figure}
-            \addcontentsline{lof}{figure}{Periodic Boundary Conditions}
-        \end{figure}
+        \begin{center}
+            \captionof{figure}{Periodic Boundary Conditions}
+        \end{center}
+
 \newpage
 \section{Monte Carlo Simulation: Code And Development}
     \subsection{Steps Toward Implementation}
@@ -407,8 +408,6 @@ When initially proposed in this report, the field of Monte Carlo methods had not
 \bibliographystyle{agsm} % this gives Harvard style references
 \bibliography{Bibliography} % change to the name of your .bib file
 
-
-
 %------------------------------Uncomment if you need an appendix
 \newpage
 \begin{appendix}
@@ -422,9 +421,9 @@ When initially proposed in this report, the field of Monte Carlo methods had not
     \section{Approximation of Pi in Python, Code Outputs}
         \begin{center}
             \includegraphics{assets/ApproximationOfPi_SimpleImplementation_Output.png}
+            \includegraphics{assets/ApproximationOfPi_GraphicalRepresentation_Output.png}
         \end{center}
 
-        \includegraphics{assets/ApproximationOfPi_GraphicalRepresentation_Output.png}
 
     \newpage
     \section{Monte Carlo C++ Code}
