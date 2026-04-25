@@ -1,19 +1,9 @@
 #include <iostream>
 
-
-int initialisation() {
-    
-    // Particle Placement
-
-
-    return 0;
-}
-
-void mcmove() {
-
-    // Particle Displacement
-
-}
+// To simulate position of particles
+struct Position {
+    double x, y, z;
+};
 
 double calc_energy() {
 
@@ -22,6 +12,20 @@ double calc_energy() {
     double energy = 0.0;
 
     return energy;
+}
+
+void mcmove() {
+
+    // Particle Displacement
+
+}
+
+int initialisation() {
+    
+    // Particle Placement
+
+
+    return 0;
 }
 
 int main() {
