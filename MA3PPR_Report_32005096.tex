@@ -175,9 +175,9 @@ b. I acknowledge the use of \textcolor{red}{[]} to generate materials that were 
 \newpage
 
 \tableofcontents
-\vspace*{0.05\textheight}
+\newpage
 \listoftables
-\vspace*{0.15\textheight}
+\vspace*{0.4\textheight}
 \listoffigures
 
 \newpage
@@ -321,7 +321,10 @@ When initially proposed in this report, the field of Monte Carlo methods had not
 
         \subsubsection{Importance}
             Like Simple sampling, Importance sampling is a method of sampling for data values over an interval, however what sets Importance sampling apart is the addition of weighted `importance' to certain selected values (hence the name given to the technique).
-            How this is achieved is through the introduction of a new weight term % Here when figured out %
+            This is achieved through the introduction of a new weight term which we will designate as $P(x)$.
+            
+
+            \citep{Gentle03}.
             
             This means that variation is reduced to either insignificant levels, or at best zero, in areas where the distribution may not be relevant to draw samples from.
 
@@ -357,22 +360,28 @@ When initially proposed in this report, the field of Monte Carlo methods had not
         in which $A, B$ are equal to $4\varepsilon\sigma^{12}, 4\varepsilon\sigma^{6}$ respectively \citep{Lennard25}.
 
         \subsubsection{Displaying The Potential Visually}
+            The Lennard-Jones plot can be shown in a graphical manner, representing the various elements of the equation, as described earlier.
+            Setting $\sigma,\: \varepsilon\; =\; 0$, for simplicities sake, generates the following graph, programmed in python (see Appendix C) using, primarily, the matplotlib library \citep{Hunter07}.
             \begin{center}
                 \includegraphics[width = 11cm, height = 11cm, keepaspectratio]{assets/LennardJonesPlot.png}
-                \captionof{figure}{Lennard-Jones Potential Plot}
+                \captionof{figure}{\small\textbf{Lennard-Jones Potential Plot}}
             \end{center}
             
         \subsubsection{Applications in Modelling Simple Liquids}
             When modelling simple liquid simulations, the Lennard-Jones potential is relevant because
     \subsection{Periodic Boundary Conditions}
         \begin{center}
-            \captionof{figure}{Periodic Boundary Conditions}
+            \captionof{figure}{\small\textbf{Periodic Boundary Conditions}}
         \end{center}
 
 \newpage
 \section{Monte Carlo Simulation: Code And Development}
     \subsection{Steps Toward Implementation}
         \subsubsection{Drawing Together The Theory}
+            In order for correct implementation of the code, all of this theory needs to be drawn together appropriately.
+            
+            Some of these concepts are built into the software that I am programming with, such as PRNGs, they are very commonly present in random functions that are found in code libraries.
+            As such is the case, I will not be programming an individual random generator but instead using an inbuilt random function within my program code. 
         \subsubsection{Initial Configuration}
         \subsubsection{Trajectory Generation Loops}
         \subsubsection{Post-Simulation Data Analysis}
@@ -380,15 +389,15 @@ When initially proposed in this report, the field of Monte Carlo methods had not
         My code was built on a framework of \textbf{Fortran} code from 'Understanding Molecular Simulation' by Daan Frenkel and Berend Smit \citep{Frenkel96}.
         Another Monte Carlo simulation of the Lennard-Jones model \citep{Kelter15}, packaged within a library known as NetLogo \citep{Wilensky99}, also provided much guidance and inspiration.
         These were adapted and rewritten from scratch, by me, into \textbf{C++}.
-        My program can be found in the appendix of this report (see Appendix C).
+        My program can be found in the appendix of this report (see Appendix D).
 
 \newpage
 \section{Application of Code to a Lennard-Jones liquid}
     \subsection{Total Energy in Plots}
-        \begin{figure}[]
-            \addcontentsline{lof}{figure}{Total Energy of Simulation}
+        \begin{center}[]
+            \captionof{figure}{\small\textbf{Total Energy of Simulation}}
 
-        \end{figure}
+        \end{center}
 
     \subsection{Numerical Analysis}
         \subsubsection{Radial Distribution Function}
@@ -414,7 +423,6 @@ When initially proposed in this report, the field of Monte Carlo methods had not
 
     \section{Approximation of Pi in Python, Using Monte Carlo Techniques}
     \lstinputlisting[title=\lstname]{ApproximationOfPi/src/python/SimpleImplementation.py}
-    \newpage
     \lstinputlisting[title=\lstname]{ApproximationOfPi/src/python/GraphicalRepresentation.py}
 
     \newpage
@@ -424,6 +432,9 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             \includegraphics{assets/ApproximationOfPi_GraphicalRepresentation_Output.png}
         \end{center}
 
+    \newpage
+    \section{Lennard-Jones Potential, Simple Plot in Python}
+    \lstinputlisting[title=\lstname]{LennardJonesPotential/src/LennardJonesPotential.py}
 
     \newpage
     \section{Monte Carlo C++ Code}
