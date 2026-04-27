@@ -1,3 +1,4 @@
+#! Python3
 """
 Lennard-Jones potential plotted in Matplotlib 
 """
