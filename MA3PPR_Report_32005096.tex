@@ -331,15 +331,21 @@ When initially proposed in this report, the field of Monte Carlo methods had not
 
         \subsubsection{Importance}
             Like Simple sampling, Importance sampling is a method of sampling for data values over an interval, however what sets Importance sampling apart is the addition of weighted `importance' to certain selected values (hence the name given to the technique).
-            This is achieved through the introduction of a new weight term which we will designate as $p(x)$.
+            This is achieved through the introduction of a new weight term which we will designate as $p(x)$. This function is commonly known as the \textit{`importance function'}.
 
-            Representing the probability density over a dimension, $D$, this new term can be worked into an estimate for our earlier integral in the following manner:
+            Representing the probability density over a dimension, $D$, this importance function can be introduced into our earlier estimated integral, making sure $p(x)$ is carefully chosen to minimise variance in the following manner:
             \[
                 \int_{D}^{}\:\tfrac{f(x)}{p(x)}\;p(x)\quad d(x)
             \]
 
-            Fulfilling a key objective of sampling in the first place, this leads to the variation being reduced to either insignificant levels or, at best, zero in areas where the distribution may not be relevant to draw samples from \citep{Gentle03}.
-
+            Fulfilling a key objective of sampling in the first place, this leads to the variation being reduced to either insignificant levels or, at best, zero in areas where the distribution may not be relevant to draw samples from.
+            
+            Variation, with respect to the distribution of $X$ with density $p(x)$, is, hence, given by:
+            \[
+                V\left(\tfrac{f(X)}{p(X)}\right)\:=\:\left[E\left(\tfrac{f^{2}(X)}{p^{2}(X)}\right)\right]\:-\:\left[E\left(\tfrac{f(X)}{p(X)}\right)\right]^{2}
+            \]
+            where $\left[E(\tfrac{f(X)}{p(X)})\right]^{2}$ is actually equal to $\left(\int_{D}^{}f(x)\:d(x)\right)^{2}$, suggesting that only the first expression in the Variance formula has any significant effect on the importance sample \citep{Gentle03}.
+            If we carefully select $p(x)$ to agree with our original $f(x)$, 
     \subsection{Statistical Mechanics}
 
     \subsection{The Metropolis Method}
@@ -379,7 +385,7 @@ When initially proposed in this report, the field of Monte Carlo methods had not
                 \captionof{figure}{\small\textbf{Lennard-Jones Potential Plot}}
             \end{center}
 
-            In order to showcase more details on certain parts of the graph, there is also a sketch included following.
+            In order to facilitate the showcasing of more details on certain parts of the graph, there is also a physical sketch included below.
             This highlights where certain variables come into play in different parts of the plot, such as $\sigma$ and $\varepsilon$, alongside the repulsion and attraction aspects.
             \begin{center}
                 \includegraphics[width = 11cm, height = 11cm, keepaspectratio]{assets/LennardJonesSketch.png}
@@ -388,8 +394,15 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             
         \subsubsection{Applications in Modelling Simple Liquids}
             When modelling simple liquid simulations, the Lennard-Jones potential is relevant because
+    
+    \newpage
     \subsection{Periodic Boundary Conditions}
+        Boundary conditions help to define how a simulation may handle particles within a system.
+        Periodic boundary conditions, in particular, aid in abstracting a small simulation of particles so that it seems like they are interacting within an infinite system.
+        This is done by letting particles cross over the boundaries of the simulation and into identical, neighbouring `cells'.
+        As can be seen in \textbf{Figure 3} \citep{Katiyar18}, this allows a much larger system to be simulated with a smaller computational load (as the simulation is started with fewer particles involved).
         \begin{center}
+            \includegraphics[width = 11cm, height = 11cm, keepaspectratio]{assets/PeriodicBoundaryConditions.png}
             \captionof{figure}{\small\textbf{Periodic Boundary Conditions}}
         \end{center}
 
