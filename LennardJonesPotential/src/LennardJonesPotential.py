@@ -18,6 +18,8 @@ def main():
     plt.ylim(-1.2, 2)
     plt.xlim(0.9, 3)
     plt.grid(True)
+    plt.ylabel("Potential Energy (V)")
+    plt.xlabel("Particle Distance (r)")
     
     plt.show()
 
