@@ -219,6 +219,13 @@ When initially proposed in this report, the field of Monte Carlo methods had not
 \newpage
 \section{Monte Carlo Methods}
 
+    Having mentioned the basic, essential history, what are Monte Carlo methods, really?
+    
+    To boil the concept down to its fundamentals, they are simulations and experiments that use randomness in order to solve complex problems.
+    These problems can manifest in different ways, from integrals to systems of equations.
+    Although numerical solutions and standard approximations may yield more exact or precise answers, Monte Carlo methods offer a viable alternative for large dimensionality of integrals and sparse systems of equations, which can often be solved more effectively in terms of cost and time.
+
+
     \subsection{Pseudo-Random Number Generators}
         Random number generation is an important part of Monte Carlo methods. 
         There are multiple different methods to obtaining random numbers, but the algorithms we are focusing on within this report are called \textbf{Pseudo-Random Number Generators} (PRNGs).
@@ -252,50 +259,53 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             Due to the modular reduction that occurs, there can only be $m$ possible values that $x$ can take; The maximum period of the LCG is, by definition, $m$
             \citep{Gentle03}.
 
-            \newpage
             \subsubsection{Linear Congruential Generator Example}
-            Following is an example of a LCG displayed in a `truth table', allowing the process to be broken down into small, simple, and visible steps.
-            Traditionally, values of $m$ are usually a power of 2 as this is easier for the computer to use during calculation. Due to this, I have chosen $m\; =\; 2^5\; = 32$ which is smaller than a typical usecase. 
-            The other values that this LCG will take are $a\: =\: 5,\; c\: =\: 7,\; X_0\: =\: 19$, which have been arbitrarily selected.
+                Following is an example of a LCG displayed in a `truth table', allowing the process to be broken down into small, simple, and visible steps.
+                Traditionally, values of $m$ are usually a power of 2 as this is easier for the computer to use during calculation. Due to this, I have chosen $m\; =\; 2^5\; = 32$ which is smaller than a typical usecase. 
+                The other values that this LCG will take are $a\: =\: 5,\; c\: =\: 7,\; X_0\: =\: 19$, which have been arbitrarily selected.
 
-            \begin{center}
-                \captionof{table}{\small\textbf{Linear Congruential Generator Example}}
-                \normalsize\begin{tabular}{|| c || c || c |||| c ||}
-                    \hline
-                    $aX_{n}$ & $+\; c$ & $( \bmod\; m)$ & $=\; X_{n+1}$ \\ [0.5ex] 
-                    \hline\hline
-                    $(5 * 19)\: =\: 95$ & $(95 + 7)\: =\: 102$ & $102\: (\bmod\: 32)$ & $\: =\: 6$ \\ 
-                    \hline
-                    $(5 * 6)\: =\: 30$ & $(30 + 7)\: =\: 37$ & $37\: (\bmod\: 32)$ & $\: =\: 5$ \\ 
-                    \hline
-                    $(5 * 5)\: =\: 25$ & $(25 + 7)\: =\: 32$ & $32\: (\bmod\: 32)$ & $\: =\: 0$ \\ 
-                    \hline
-                    $(5 * 0)\: =\: 0$ & $(0 + 7)\: =\: 7$ & $7\: (\bmod\: 32)$ & $\: =\: 7$ \\ 
-                    \hline
-                    $(5 * 7)\: =\: 35$ & $(35 + 7)\: =\: 42$ & $42\: (\bmod\: 32)$ & $\: =\: 10$ \\ 
-                    \hline
-                    $(5 * 10)\: =\: 50$ & $(50 + 7)\: =\: 57$ & $57\: (\bmod\: 32)$ & $\: =\: 25$ \\ 
-                    \hline
-                    $(5 * 25)\: =\: 125$ & $(125 + 7)\: =\: 132$ & $132\: (\bmod\: 32)$ & $\: =\: 4$ \\ 
-                    \hline
-                \end{tabular}
-            \end{center}
+                \begin{center}
+                    \captionof{table}{\small\textbf{Linear Congruential Generator Example}}
+                    \normalsize\begin{tabular}{|| c || c || c |||| c ||}
+                        \hline
+                        $aX_{n}$ & $+\; c$ & $( \bmod\; m)$ & $=\; X_{n+1}$ \\ [0.5ex] 
+                        \hline\hline
+                        $(5 * 19)\: =\: 95$ & $(95 + 7)\: =\: 102$ & $102\: (\bmod\: 32)$ & $\: =\: 6$ \\ 
+                        \hline
+                        $(5 * 6)\: =\: 30$ & $(30 + 7)\: =\: 37$ & $37\: (\bmod\: 32)$ & $\: =\: 5$ \\ 
+                        \hline
+                        $(5 * 5)\: =\: 25$ & $(25 + 7)\: =\: 32$ & $32\: (\bmod\: 32)$ & $\: =\: 0$ \\ 
+                        \hline
+                        $(5 * 0)\: =\: 0$ & $(0 + 7)\: =\: 7$ & $7\: (\bmod\: 32)$ & $\: =\: 7$ \\ 
+                        \hline
+                        $(5 * 7)\: =\: 35$ & $(35 + 7)\: =\: 42$ & $42\: (\bmod\: 32)$ & $\: =\: 10$ \\ 
+                        \hline
+                        $(5 * 10)\: =\: 50$ & $(50 + 7)\: =\: 57$ & $57\: (\bmod\: 32)$ & $\: =\: 25$ \\ 
+                        \hline
+                        $(5 * 25)\: =\: 125$ & $(125 + 7)\: =\: 132$ & $132\: (\bmod\: 32)$ & $\: =\: 4$ \\ 
+                        \hline
+                    \end{tabular}
+                \end{center}
 
-            From the table, we can see that for the Linear Congruential Generator $5X_{n}+7\; (\bmod\: 2^5)$, the starting seed of $X_{0} = 19$ provides a sequence of: $6, 5, 0, 7, 10, 25, 4\cdots$.
-            
-            Following this, the sequence continues until it starts to repeat, having a period of 32 (the value of $m$, as stated earlier).
-            The full sequence in its entirety is:
-            \small\[
-            19,6,5,0,7,10,25,4,27,14,13,8,15,18,1,12,3,22,21,16,23,26,9,20,11,30,29,24,31,2,17,28,19,\ldots
-            \]
+                From the table, we can see that for the Linear Congruential Generator $5X_{n}+7\; (\bmod\: 2^5)$, the starting seed of $X_{0} = 19$ provides a sequence of: $6, 5, 0, 7, 10, 25, 4\cdots$.
+                
+                Following this, the sequence continues until it starts to repeat, having a period of 32 (the value of $m$, as stated earlier).
+                The full sequence in its entirety is:
+                \small\[
+                19,6,5,0,7,10,25,4,27,14,13,8,15,18,1,12,3,22,21,16,23,26,9,20,11,30,29,24,31,2,17,28,19,\ldots
+                \]
 
         \subsubsection{The Mersenne Twister}
-            The Mersenne Twister is a more complex, modern PRNG developed in 1997 \citep{Matsumoto98}.
+            The Mersenne Twister is a more complex, modern PRNG family, developed initially in 1997 \citep{Matsumoto98}.
             
             It derives its name from a prime number known as a Mersenne Prime, which contributes to its period. As its period is sufficiently large, the algorithm is highly optimised,
             and the numbers generated have low correlations, the Mersenne Twister is a prominent PRNG that is used across industry.
-            Most notably, it is used in scientific simulations (Monte Carlo methods, as discussed) but also within Machine Learning, statistical sampling and also video game graphics \citep{Samadov24}. 
+            Most notably, it is used in scientific simulations (Monte Carlo methods, as discussed) but also within Machine Learning, statistical sampling and also video game graphics \citep{Samadov24}.
 
+            As, arguably, the most widely used PRNG in the modern day, the Mersenne Twister can be found in many software libraries for standard random generation. These include, but are not limited to, Python, Ruby, and R.
+            One of its multiple variant forms can be used in C++ through \verb|std::mt19937| in the standard library. Due to these occurrences, it is highly likely that within code used in this report (found in the Appendices), the Mersenne Twister is the PRNG that has contributed random elements.
+            This, however, has not been strictly verified.
+    
     \newpage
     \subsection{Sampling Methodology}
         By `Sampling Methodology', we refer to the way in which Monte Carlo methods are used to sample data points (selections to be respresented within subsequent analysis). 
@@ -308,11 +318,11 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             This entails the collection of completely random observations of a random variable.
             The aformentioned reliance on the law of large numbers leads to a large enough sample size so that an estimate of the expected value ($E[X]$) can be found \citep{KTH}.
 
-            The way that simple sampling works is based upon the integral of a collected distribution.
+            To see the way that simple sampling works, we can base an example upon the integral of a collected distribution.
             If a one-dimensional integral $I$, where $I = \int_{a}^{b}\; dx\; f(x)$, were to be re-written as:
             \[I = (b - a)\; \langle\: f(x)\: \rangle,\]
             this would represent the unweighted average of $f(x)$ over the interval $[a, b]$.
-            As this average is evaluated, larger and larger distributions tending to infinity yield a correct value of $I$ \citep{Frenkel96}.
+            As this average is evaluated, larger and larger distributions, tending to infinity, yield a correct value of $I$ \citep{Frenkel96}.
 
             An example of this `crude monte carlo' method can be found in the approximation of Pi mentioned earlier (see Appendices A and B),
             where uniform and random coordinates are generated within the given square. This results in a calculated average for the value of Pi.
@@ -321,12 +331,14 @@ When initially proposed in this report, the field of Monte Carlo methods had not
 
         \subsubsection{Importance}
             Like Simple sampling, Importance sampling is a method of sampling for data values over an interval, however what sets Importance sampling apart is the addition of weighted `importance' to certain selected values (hence the name given to the technique).
-            This is achieved through the introduction of a new weight term which we will designate as $P(x)$.
-            
+            This is achieved through the introduction of a new weight term which we will designate as $p(x)$.
 
-            \citep{Gentle03}.
-            
-            This means that variation is reduced to either insignificant levels, or at best zero, in areas where the distribution may not be relevant to draw samples from.
+            Representing the probability density over a dimension, $D$, this new term can be worked into an estimate for our earlier integral in the following manner:
+            \[
+                \int_{D}^{}\:\tfrac{f(x)}{p(x)}\;p(x)\quad d(x)
+            \]
+
+            Fulfilling a key objective of sampling in the first place, this leads to the variation being reduced to either insignificant levels or, at best, zero in areas where the distribution may not be relevant to draw samples from \citep{Gentle03}.
 
     \subsection{Statistical Mechanics}
 
@@ -365,6 +377,13 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             \begin{center}
                 \includegraphics[width = 11cm, height = 11cm, keepaspectratio]{assets/LennardJonesPlot.png}
                 \captionof{figure}{\small\textbf{Lennard-Jones Potential Plot}}
+            \end{center}
+
+            In order to showcase more details on certain parts of the graph, there is also a sketch included following.
+            This highlights where certain variables come into play in different parts of the plot, such as $\sigma$ and $\varepsilon$, alongside the repulsion and attraction aspects.
+            \begin{center}
+                \includegraphics[width = 11cm, height = 11cm, keepaspectratio]{assets/LennardJonesSketch.png}
+                \captionof{figure}{\small\textbf{Lennard-Jones Potential Sketch}}
             \end{center}
             
         \subsubsection{Applications in Modelling Simple Liquids}
