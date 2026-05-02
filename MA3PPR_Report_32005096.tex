@@ -344,8 +344,21 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             \[
                 V\left(\tfrac{f(X)}{p(X)}\right)\:=\:\left[E\left(\tfrac{f^{2}(X)}{p^{2}(X)}\right)\right]\:-\:\left[E\left(\tfrac{f(X)}{p(X)}\right)\right]^{2}
             \]
-            where $\left[E(\tfrac{f(X)}{p(X)})\right]^{2}$ is actually equal to $\left(\int_{D}^{}f(x)\:d(x)\right)^{2}$, suggesting that only the first expression in the Variance formula has any significant effect on the importance sample \citep{Gentle03}.
-            If we carefully select $p(x)$ to agree with our original $f(x)$, 
+            where $\left[E(\tfrac{f(X)}{p(X)})\right]^{2}$ is actually equal to $\left(\int_{D}^{}f(x)\:d(x)\right)^{2}$, suggesting that only the first expression in the Variance formula has any significant effect on the importance sample.
+            
+            By Jensen's inequality (see Appendix D for theorem and proof via \citep{Wasserman04}), there is a lower bound on this first term.
+            This looks like:
+            \begin{align}
+                E\left(\tfrac{f^{2}(X)}{p^{2}(X)}\right)\; &\geq\; \left(E\left(\tfrac{|f(X)|}{p(X)}\right)\right)^{2} \notag \\
+                                           &= \left(\int_{D}^{}|f(x)|\:d(x)\right)^{2} \notag
+            \end{align}
+
+            This is where it is important to select a correct $p(x)$. This bound we have shown is achieved when
+            \[
+                p(x) = \tfrac{|f(x)|}{\int_{D}^{}|f(x)|\:dx},
+            \]
+            but this is futile when we're considering a monte carlo estimate (and do not know the integral necessarily) - therefore we seek to choose $p$ nearly proportional to $|f|$.
+            Ultimatelty, it is preferable for $\tfrac{|f(x)|}{p(x)}$ to be nearly constant \citep{Gentle03}.
     \subsection{Statistical Mechanics}
 
     \subsection{The Metropolis Method}
@@ -421,7 +434,7 @@ When initially proposed in this report, the field of Monte Carlo methods had not
         My code was built on a framework of \textbf{Fortran} code from 'Understanding Molecular Simulation' by Daan Frenkel and Berend Smit \citep{Frenkel96}.
         Another Monte Carlo simulation of the Lennard-Jones model \citep{Kelter15}, packaged within a library known as NetLogo \citep{Wilensky99}, also provided much guidance and inspiration.
         These were adapted and rewritten from scratch, by me, into \textbf{C++}.
-        My program can be found in the appendix of this report (see Appendix D).
+        My program can be found in the appendix of this report (see Appendix E).
 
 \newpage
 \section{Application of Code to a Lennard-Jones liquid}
@@ -467,6 +480,17 @@ When initially proposed in this report, the field of Monte Carlo methods had not
     \newpage
     \section{Lennard-Jones Potential, Simple Plot in Python}
     \lstinputlisting[title=\lstname]{LennardJonesPotential/src/LennardJonesPotential.py}
+
+
+    \newpage
+    \section{Jensen's Inequality}
+    \begin{center}
+        \includegraphics{assets/JensensInequality.png}
+    \end{center}
+    \begin{flushright}
+        \small\textbf{via \citep{Wasserman04}}
+    \end{flushright}
+
 
     \newpage
     \section{Monte Carlo C++ Code}
