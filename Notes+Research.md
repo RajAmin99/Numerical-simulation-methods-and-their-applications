@@ -60,5 +60,13 @@ https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/Sa
 
 
 
+**Statistical Mechanics**:
+- Microstates vs Macrostates
+- variables E, V, N: N - number of atoms by mass
+- Statistical mechanics aims to study the most probable behaviour of the system
+- To calculate, an ensemble is required
+- 
+
+
 
 
