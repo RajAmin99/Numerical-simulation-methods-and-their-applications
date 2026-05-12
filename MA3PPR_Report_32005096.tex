@@ -333,13 +333,13 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             Like Simple sampling, Importance sampling is a method of sampling for data values over an interval, however what sets Importance sampling apart is the addition of weighted `importance' to certain selected values (hence the name given to the technique).
             This is achieved through the introduction of a new weight term which we will designate as $p(x)$. This function is commonly known as the \textit{`importance function'}.
 
-            Representing the probability density over a dimension, $D$, this importance function can be introduced into our earlier estimated integral, making sure $p(x)$ is carefully chosen to minimise variance in the following manner:
+            Fulfilling a key objective of sampling in the first place, this leads to the variation being reduced to either insignificant levels or, at best, zero in areas where the distribution may not be relevant to draw samples from.
+
+            Representing the probability density over a dimension, $D$, this importance function can be introduced into our earlier estimated integral, making sure $p(x)$ is carefully chosen to minimise variance:
             \[
                 \int_{D}^{}\:\tfrac{f(x)}{p(x)}\;p(x)\quad d(x)
             \]
 
-            Fulfilling a key objective of sampling in the first place, this leads to the variation being reduced to either insignificant levels or, at best, zero in areas where the distribution may not be relevant to draw samples from.
-            
             Variation, with respect to the distribution of $X$ with density $p(x)$, is, hence, given by:
             \[
                 V\left(\tfrac{f(X)}{p(X)}\right)\:=\:\left[E\left(\tfrac{f^{2}(X)}{p^{2}(X)}\right)\right]\:-\:\left[E\left(\tfrac{f(X)}{p(X)}\right)\right]^{2}
@@ -358,9 +358,13 @@ When initially proposed in this report, the field of Monte Carlo methods had not
                 p(x) = \tfrac{|f(x)|}{\int_{D}^{}|f(x)|\:dx},
             \]
             but this is futile when we're considering a monte carlo estimate (and do not know the integral necessarily) - therefore we seek to choose $p$ nearly proportional to $|f|$.
-            Ultimatelty, it is preferable for $\tfrac{|f(x)|}{p(x)}$ to be nearly constant \citep{Gentle03}.
+            Ultimatelty, it is preferable for $\tfrac{|f(x)|}{p(x)}$ to be nearly constant \citep{Gentle03} as this allows variance to, as stated previous, ``vanish altogether'' \citep{Frenkel96}.
     \subsection{Statistical Mechanics}
+        In order to understand working with particles, and simulations of them, statistical mechanics plays a pivotal part.
+        Within this field, matterns of concern include `macrostates' and `microstates'.
 
+        \citep{Saxena16}
+        \citep{Greiner95}
     \subsection{The Metropolis Method}
 
 \newpage
@@ -373,7 +377,7 @@ When initially proposed in this report, the field of Monte Carlo methods had not
         The equation is given as follows
         \[
             \LJPotential
-        \]
+        \] 
         where:
         \begin{itemize}
             \item $V$ indicates the intermolecular potential between particles,
@@ -412,8 +416,8 @@ When initially proposed in this report, the field of Monte Carlo methods had not
     \subsection{Periodic Boundary Conditions}
         Boundary conditions help to define how a simulation may handle particles within a system.
         Periodic boundary conditions, in particular, aid in abstracting a small simulation of particles so that it seems like they are interacting within an infinite system.
-        This is done by letting particles cross over the boundaries of the simulation and into identical, neighbouring `cells'.
-        As can be seen in \textbf{Figure 3} \citep{Katiyar18}, this allows a much larger system to be simulated with a smaller computational load (as the simulation is started with fewer particles involved).
+        This is done by letting particles cross over the boundaries of the simulation and into identical neighbouring `cells', i.e cells are tiled infinitely and particles leaving the cell re-enter through the opposite face which can be seen in \textbf{Figure 3} \citep{Katiyar18}.
+        This allows a much larger system to be simulated with a smaller computational load (as the simulation is started with fewer particles involved).
         \begin{center}
             \includegraphics[width = 11cm, height = 11cm, keepaspectratio]{assets/PeriodicBoundaryConditions.png}
             \captionof{figure}{\small\textbf{Periodic Boundary Conditions}}
@@ -426,7 +430,10 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             In order for correct implementation of the code, all of this theory needs to be drawn together appropriately.
             
             Some of these concepts are built into the software that I am programming with, such as PRNGs, they are very commonly present in random functions that are found in code libraries.
-            As such is the case, I will not be programming an individual random generator but instead using an inbuilt random function within my program code. 
+            As such is the case, I will not be programming an individual random generator but instead using an inbuilt random function within my program code.
+            
+            The Lennard-Jones potential, previously mentioned, will be used within the code in order for calculations to be taken on particle distances and repulsions.
+            This will be hard-coded in.
         \subsubsection{Initial Configuration}
         \subsubsection{Trajectory Generation Loops}
         \subsubsection{Post-Simulation Data Analysis}
