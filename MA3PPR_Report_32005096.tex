@@ -63,13 +63,35 @@
   identifierstyle=\color{blue},
   stringstyle=\color{orange},
 }
-\lstdefinestyle{customasm}{
+
+% Python Syntax highlighting
+\lstdefinestyle{custompython}{
   belowcaptionskip=1\baselineskip,
+  breaklines=true,
   frame=L,
   xleftmargin=\parindent,
-  language=[x86masm]Assembler,
+  language=Python,
+  showstringspaces=false,
   basicstyle=\footnotesize\ttfamily,
-  commentstyle=\itshape\color{purple!40!black},
+  keywordstyle=\bfseries\color{blue!70!black},
+  commentstyle=\itshape\color{gray!80!black},
+  identifierstyle=\color{black},
+  stringstyle=\color{green!60!black},
+}
+
+% R Syntax highlighting
+\lstdefinestyle{customr}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=R,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{blue!80!black},
+  commentstyle=\itshape\color{teal!80!black},
+  identifierstyle=\color{black},
+  stringstyle=\color{red!60!black},
 }
 \lstset{escapechar=@,style=customcpp}
 
@@ -417,11 +439,16 @@ When initially proposed in this report, the field of Monte Carlo methods had not
         Boundary conditions help to define how a simulation may handle particles within a system.
         Periodic boundary conditions, in particular, aid in abstracting a small simulation of particles so that it seems like they are interacting within an infinite system.
         This is done by letting particles cross over the boundaries of the simulation and into identical neighbouring `cells', i.e cells are tiled infinitely and particles leaving the cell re-enter through the opposite face which can be seen in \textbf{Figure 3} \citep{Katiyar18}.
-        This allows a much larger system to be simulated with a smaller computational load (as the simulation is started with fewer particles involved).
+        This allows a much larger system to be simulated with a smaller computational load (as the simulation only really has fewer particles that are replicated and extrapolated).
         \begin{center}
             \includegraphics[width = 11cm, height = 11cm, keepaspectratio]{assets/PeriodicBoundaryConditions.png}
             \captionof{figure}{\small\textbf{Periodic Boundary Conditions}}
         \end{center}
+
+        When calculating the interaction energy between a Particle A and Particle B, program code would not just look at a single simple distance.
+        Rather, Particle B and all of its infinite \textbf{`periodic images'} (the clones in the adjacent cells) would be considered.
+        The simulation would then calculate the distance to whichever image is physically closest to Particle A.
+        This ensures that particles near the boundary of the primary box correctly interact with the fluid surrounding them.
 
 \newpage
 \section{Monte Carlo Simulation: Code And Development}
@@ -433,10 +460,16 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             As such is the case, I will be using an inbuilt Mersenne Twister within my program code.
             
             The Lennard-Jones potential, previously mentioned, will be used within the code in order for calculations to be taken on particle distances and repulsions.
-            This will be hard-coded in.
-        \subsubsection{Initial Configuration}
+            This will be hard-coded in. % Mention energy calculation
 
+            % Mention of periodic boundary conditions and minimum image
+            % Mention of 
+        \subsubsection{Initial Configuration}
+            % Mersenne twister, where its used, etc
             Mersenne Twister seed is 32005096
+
+            % Talk about lattice, 2d dimensions
+            % Mention number of particles chosen and 
         \subsubsection{Trajectory Generation Loops}
         \subsubsection{Post-Simulation Data Analysis}
     \subsection{Code Origin and Inspiration}
@@ -475,6 +508,8 @@ When initially proposed in this report, the field of Monte Carlo methods had not
 \newpage
 \begin{appendix}
 
+    % MAKE SURE TO ORDER THESE PROPERLY
+
     \section{Approximation of Pi in Python, Using Monte Carlo Techniques}
     \lstinputlisting[title=\lstname]{ApproximationOfPi/src/python/SimpleImplementation.py}
     \lstinputlisting[title=\lstname]{ApproximationOfPi/src/python/GraphicalRepresentation.py}
@@ -503,7 +538,21 @@ When initially proposed in this report, the field of Monte Carlo methods had not
 
     \newpage
     \section{Monte Carlo C++ Code}
-    \lstinputlisting[title=\lstname]{ParticleSimulation/src/main.cpp}
+    \lstinputlisting[style=customcpp, title=\lstname]{ParticleSimulation/src/main.cpp}
+
+    \newpage
+    \section{Data Analysis R Code}
+    \lstinputlisting[style=customr, title=\lstname]{ParticleSimulation/src/DataAnalysis.R}
+
+    \newpage
+    \section{Particle Energy Data}
+    \lstinputlisting{ParticleSimulation/data/energy_data.csv}
+
+    \newpage
+    \section{Coordinate Data for Radial Distribution Function}
+    \lstinputlisting{ParticleSimulation/data/rdf_histogram.csv}
+
+
     
 \end{appendix}
 
