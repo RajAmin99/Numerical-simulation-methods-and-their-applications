@@ -516,16 +516,23 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             The system is initialised with $N = 150$ particles.
             A reduced density of $\rho^* = 0.8$ is chosen, which dictates how big the simulation's box length should be ($L = \sqrt{N/\rho^*}$). 
             
-            Before trajectory generation can begin, the simulation environment must be established. The system is initialised with $N = 150$ particles. A target reduced density of $\rho^* = 0.8$ is chosen, which algebraically dictates the square simulation's box length ($L = \sqrt{N/\rho^*}$). 
-            
             To prevent particles from spawning on top of one another, which would trigger infinite energy through the $1/r^{12}$ Lennard-Jones term, the particles are initialised onto a regular lattice.
             
             Finally, the Mersenne Twister PRNG is initialised with a fixed seed of 32005096.
             Although testing and development used a random seed, which has been left within comments in the code, the fixed seed guarantees that random displacements and conditional acceptances can be reproducible for evaluation purposes.
         
+        \subsubsection{Trajectory Generation Loops}
+
+            Regarding the Metropolis method, the derivation found in~\ref{sec: Metropolis} (on page~\pageref{sec: Metropolis}) translates into a straightforward algorithmic loop.
+            A particle is randomly selected and given a small trial displacement.
+            The change in energy, $\Delta E = E_j - E_i$, is calculated.
+            If $\Delta E < 0$, the acceptance probability evaluates to 1, and the move is automatically accepted.
+            If $\Delta E > 0$, the move is accepted conditionally by comparing the Boltzmann weight $\exp(-\Delta E / T)$ (using reduced units where $k_B = 1$) against a generated pseudo-random number.
+            This occasional acceptance of uphill energy moves allows the system to escape local energy minima and accurately sample the phase space.
+        
         \subsubsection{Post-Simulation Data Analysis}
 
-            Post simulation data analysis has been undertaken in the R programming language (see Appendix F).
+            Post simulation data analysis has been undertaken in the R programming language (see Appendix).
     \subsection{Code Origin and Inspiration}
         My code was built on a framework of \textbf{Fortran} code from 'Understanding Molecular Simulation' by Daan Frenkel and Berend Smit \citep{Frenkel96}.
         Another Monte Carlo simulation of the Lennard-Jones model \citep{Kelter15}, packaged within a library known as NetLogo \citep{Wilensky99}, also provided much guidance and inspiration.
