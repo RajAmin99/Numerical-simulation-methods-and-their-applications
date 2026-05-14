@@ -151,7 +151,7 @@
     
 
 \maketitle
-\vspace{30mm}
+\vspace{20mm}
 
 
 %-----------------------------------------------------------------------------------PLAIN LANGUAGE SUMMARY BEGINS
@@ -159,15 +159,19 @@
 % Please insert your plain language summary (PLS) here. Your PLS should summarize your study including the motivation, methods, results, conclusions and their broader relevance without using jargon so that it is understandable by intelligent adults from outside of your discipline. The PLS should be a single paragraph of no more than 200 words long.
 
 This project concerns working with a computer simulation of a particle-based system, particularly using numerical techniques known as Monte Carlo simulations.
-\vspace{3mm}
+\vspace{2mm}
 
 It starts with an introduction to the history of these methods, touching upon the Manhattan Project, then focusing on pseudo-random number generators, sampling methodologies, and their applications in statistical mechanics.
 The project also explores the Metropolis method and its application to a Lennard-Jones liquid.
 Finally, it concludes with findings of a simulation created from individually developed C++ code.
-\vspace{3mm}
+\vspace{2mm}
 
-These findings consist of elements such as total energy within the system,
-and values derived from numerical analysis of the particles, such as (but not limited to) the radial distribution and diffusion coefficients.
+These findings consist of the total energy within the system
+and the radial distribution function.
+\vspace{2mm}
+
+What we conclude is
+
 \end{abstract}
 
 %-----------------------------------------------------------------------------------PLAIN LANGUAGE SUMMARY ENDS
@@ -501,23 +505,16 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             As such is the case, I will be using an inbuilt Mersenne Twister within my program code.
             
             The Lennard-Jones potential, previously mentioned, will be used within the code in order for calculations to be taken on particle distances and repulsions.
-            This will be hard-coded in. % Mention energy calculation
+            This will be hard-coded into an energy calculation function.
+            To practically implement Periodic Boundary Conditions, the simulation relies on Minimum Image Convention, which is a rule within simulations stating that only the closest copies of particles should interact with another (even though there are infinitely many cells).
+            To carry this out when computing the distance between two particles, the distance vectors ($dx$ and $dy$) are adjusted by subtracting the simulation box length multiplied by the rounded ratio of the distance to the box length.
+            This makes sure that each particle interacts only with the closest image of its neighbours, simulating a liquid without having to calculate an impossibly large number of interactions.
 
-            % Mention of periodic boundary conditions and minimum image
-            % Mention of 
         \subsubsection{Initial Configuration}
-            % Mersenne twister, where its used, etc
-            Mersenne Twister seed is 32005096
-
-            % Talk about lattice, 2d dimensions
-            % Mention number of particles chosen and 
-        \subsubsection{Trajectory Generation Loops}
-            Regarding the Metropolis method, the derivation found in~\ref{sec: Metropolis} (on page~\pageref{sec: Metropolis}) translates into a straightforward algorithmic loop.
-            A particle is randomly selected and given a small trial displacement.
-            The change in energy, $\Delta E = E_j - E_i$, is calculated.
-            If $\Delta E < 0$, the acceptance probability evaluates to 1, and the move is automatically accepted.
-            If $\Delta E > 0$, the move is accepted conditionally by comparing the Boltzmann weight $\exp(-\Delta E / T)$ (using reduced units where $k_B = 1$) against a generated pseudo-random number.
-            This occasional acceptance of uphill energy moves allows the system to escape local energy minima and accurately sample the phase space.
+            Before trajectory generation can begin, the simulation environment must be established.
+            The system is initialised with $N = 150$ particles.
+            A reduced density of $\rho^* = 0.8$ is chosen, which dictates how big the simulation's box length should be ($L = \sqrt{N/\rho^*}$). 
+            
         \subsubsection{Post-Simulation Data Analysis}
     \subsection{Code Origin and Inspiration}
         My code was built on a framework of \textbf{Fortran} code from 'Understanding Molecular Simulation' by Daan Frenkel and Berend Smit \citep{Frenkel96}.
