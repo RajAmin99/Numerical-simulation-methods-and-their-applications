@@ -383,12 +383,44 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             Ultimatelty, it is preferable for $\tfrac{|f(x)|}{p(x)}$ to be nearly constant \citep{Gentle03} as this allows variance to, as stated previous, ``vanish altogether'' \citep{Frenkel96}.
     \subsection{Statistical Mechanics}
         In order to understand working with particles, and simulations of them, statistical mechanics plays a pivotal part.
-        Within this field, matterns of concern include `macrostates' and `microstates'.
+        Within this field, matters of concern include \textbf{`macrostates'} and \textbf{`microstates'}.
+        Statistical mechanics serves as the bridge connecting microscopic particle behaviour to observable macroscopic properties.
+        A microstate represents a specific, highly detailed configuration of the system at a frozen point in time, such as the exact spatial coordinates of all particles in a liquid simulation.
+        By contrast, a macrostate describes the overall thermodynamic condition of the system, defined by fixed properties \citep{Greiner95}.
 
-        \citep{Saxena16}
-        \citep{Greiner95}
-    \subsection{The Metropolis Method}
+        A system at thermal equilibrium would not visit every possible microstate with equal probability.
+        Instead, the probability $P(x)$ of finding the system in a specific microstate $x$ with energy $E(x)$ is proportional to its Boltzmann weight:
+        \[
+            P(\mathbf{x}) \propto \exp(-\beta E(\mathbf{x}))
+        \]
+        where $\beta = 1 / k_B T$, and $k_B$ is the Boltzmann constant.
+        By generating a sample of microstates that follow this distribution, we can accurately calculate macroscopic thermodynamic averages without needing to evaluate the complex, and often computationally impossible, partition function \citep{Saxena16}.
+        
+    \subsection{The Metropolis Method}\label{sec: Metropolis}
+        The Metropolis method is an application of importance sampling of system states.
+        Rather than picking completely random configurations, which would likely result in particle overlaps and infinite energies, the algorithm targets configurations with high Boltzmann probabilities.
 
+        To ensure the simulation produces a true representation of thermal equilibrium without systematic bias, the transition between states must satisfy the condition of detailed balance.
+        This principle states that the rate of transitioning from an old state $i$ to a new state $j$ must exactly equal the reverse transition rate:
+        \[
+            P_i W_{i\to j} = P_j W_{j\to i}
+        \]
+        where $P_i$ is the Boltzmann probability of state $i$, and $W_{i\to j}$ is the underlying transition probability.
+
+        We can split this transition probability into two components: the probability of proposing the move, $q_{i\to j}$, and the probability of accepting it, $A_{i\to j}$.
+        Substituting this into the detailed balance equation gives:
+        \[
+            P_i q_{i\to j} A_{i\to j} = P_j q_{j\to i} A_{j\to i}
+        \]
+        By choosing a symmetric proposal distribution—meaning the chance of proposing a random spatial shift from $i$ to $j$ is the same as proposing a shift from $j$ to $i$ ($q_{i\to j} = q_{j\to i}$)—the proposal probabilities cancel out.
+        Rearranging the remaining terms yields the ratio of acceptance probabilities:
+        \[
+            \frac{A_{i\to j}}{A_{j\to i}} = \frac{P_j}{P_i} = \exp(-\beta(E_j - E_i))
+        \]
+        To satisfy this ratio, the Metropolis choice for the acceptance probability is defined as:
+        \[
+            A_{i\to j} = \min\big(1, \exp(-\beta(E_j - E_i))\big)
+        \] \citep{Landau21}.
 \newpage
 \section{The Lennard-Jones Potential}
 
@@ -471,6 +503,12 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             % Talk about lattice, 2d dimensions
             % Mention number of particles chosen and 
         \subsubsection{Trajectory Generation Loops}
+            Regarding the Metropolis method, the derivation found in~\ref{sec: Metropolis} (on page~\pageref{sec: Metropolis}) translates into a straightforward algorithmic loop.
+            A particle is randomly selected and given a small trial displacement.
+            The change in energy, $\Delta E = E_j - E_i$, is calculated.
+            If $\Delta E < 0$, the acceptance probability evaluates to 1, and the move is automatically accepted.
+            If $\Delta E > 0$, the move is accepted conditionally by comparing the Boltzmann weight $\exp(-\Delta E / T)$ (using reduced units where $k_B = 1$) against a generated pseudo-random number.
+            This occasional acceptance of uphill energy moves allows the system to escape local energy minima and accurately sample the phase space.
         \subsubsection{Post-Simulation Data Analysis}
     \subsection{Code Origin and Inspiration}
         My code was built on a framework of \textbf{Fortran} code from 'Understanding Molecular Simulation' by Daan Frenkel and Berend Smit \citep{Frenkel96}.
