@@ -522,6 +522,8 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             Although testing and development used a random seed, which has been left within comments in the code, the fixed seed guarantees that random displacements and conditional acceptances can be reproducible for evaluation purposes.
         
         \subsubsection{Trajectory Generation Loops}
+            The simulation runs for 5000 Monte Carlo cycles.
+            Within each cycle, the algorithm attempts $N$ individual trial moves to ensure every particle has a statistical chance of displacement.
 
             Regarding the Metropolis method, the derivation found in~\ref{sec: Metropolis} (on page~\pageref{sec: Metropolis}) translates into a straightforward algorithmic loop.
             A particle is randomly selected and given a small trial displacement.
@@ -531,8 +533,13 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             This occasional acceptance of uphill energy moves allows the system to escape local energy minima and accurately sample the phase space.
         
         \subsubsection{Post-Simulation Data Analysis}
-
-            Post simulation data analysis has been undertaken in the R programming language (see Appendix).
+            During the simulation, a tracking function isolates distinct points: every 10 cycles, the total energy of the system is calculated and recorded to monitor equilibration.
+            Simultaneously, the distances between all particle pairs are sampled and tallied into histogram bins to track structural data, in order to compute the radial distribution function later on.
+            
+            Once the 5000 cycles are complete, this data is exported into \textbf{`csv'} files (see Appendices G and H).
+            Externally, programmed in R, the \verb|ggplot2| library is used to plot the data after import.
+            Statistical normalisation takes place in order to convert the raw rdf data into a radial distribution function.
+    
     \subsection{Code Origin and Inspiration}
         My code was built on a framework of \textbf{Fortran} code from 'Understanding Molecular Simulation' by Daan Frenkel and Berend Smit \citep{Frenkel96}.
         Another Monte Carlo simulation of the Lennard-Jones model \citep{Kelter15}, packaged within a library known as NetLogo \citep{Wilensky99}, also provided much guidance and inspiration.
@@ -542,13 +549,18 @@ When initially proposed in this report, the field of Monte Carlo methods had not
 \newpage
 \section{Application of Code to a Lennard-Jones liquid}
     \subsection{Total Energy in Plots}
-        \begin{center}[]
+        \begin{center}
+            \includegraphics[width = 15cm, height = 8cm, keepaspectratio]{assets/particle_Energy_plot.png}       
             \captionof{figure}{\small\textbf{Total Energy of Simulation}}
-
         \end{center}
 
     \subsection{Numerical Analysis}
         \subsubsection{Radial Distribution Function}
+            \begin{center}
+                \includegraphics[width = 15cm, height = 8cm, keepaspectratio]{assets/rdf_Data_plot.png}
+                \captionof{figure}{\small\textbf{Radial Distribution Function}}
+            \end{center}
+
         \subsubsection{Mean-Squared Displacements}
         \subsubsection{Diffusion Coefficients}
 
