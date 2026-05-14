@@ -199,7 +199,7 @@ b. I acknowledge the use of \textcolor{red}{[]} to generate materials that were 
 \tableofcontents
 \newpage
 \listoftables
-\vspace*{0.4\textheight}
+\vspace*{0.05\textheight}
 \listoffigures
 
 \newpage
@@ -464,11 +464,18 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             \end{center}
             
         \subsubsection{Applications in Modelling Simple Liquids}
-            A \textbf{`Simple liquid'} within statistical mechanics refers to 
-        
-            When modelling simple liquid simulations, the Lennard-Jones potential is relevant because
-    
-    \newpage
+            Hansen and Mcdonald (cited by Ingebrigsten et al.) refer to a \textbf{`simple liquid'}, within statistical mechanics, as ``a classical system of approximately spherical, nonpolar molecules interacting via pair potentials'' \citep{Ingebrigtsen12}.
+            Because these particles lack directional connections (unlike tangled chains of polymers), their interactions depend purely on the straight-line distance between their centres.
+            What that means is that interactions are fuelled purely by influence from other particles in the same system.
+            This makes the Lennard-Jones model an ideal and computationally efficient mathematical representation of said system as it provides a description of forces acting on these particles.
+
+            The Lennard-Jones potential is highly relevant because it captures the two opposing physical forces required for a liquid state to exist:
+            \begin{itemize}
+                \item \textbf{Cohesion (The $(\sigma/r)^6$ term):} This models the long-range van der Waals attractive forces. Without this weak pull, the particles would simply bounce off one another and expand infinitely as an ideal gas. This term holds the particles together to form a condensed liquid phase.
+                \item \textbf{Volume (The $(\sigma/r)^{12}$ term):} If particles only attracted one another, the system would eventually collapse into a single dense point. This term models the repulsion that occurs, preventing total collapse and giving the particles a defined physical volume.
+            \end{itemize}
+
+            By balancing these attractive and repulsive forces, the Lennard-Jones potential would allow a computer simulation to naturally simulate a basic physics system for the particles created.
     \subsection{Periodic Boundary Conditions}
         Boundary conditions help to define how a simulation may handle particles within a system.
         Periodic boundary conditions, in particular, aid in abstracting a small simulation of particles so that it seems like they are interacting within an infinite system.
