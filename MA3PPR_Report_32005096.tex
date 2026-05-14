@@ -506,6 +506,7 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             
             The Lennard-Jones potential, previously mentioned, will be used within the code in order for calculations to be taken on particle distances and repulsions.
             This will be hard-coded into an energy calculation function.
+            
             To practically implement Periodic Boundary Conditions, the simulation relies on Minimum Image Convention, which is a rule within simulations stating that only the closest copies of particles should interact with another (even though there are infinitely many cells).
             To carry this out when computing the distance between two particles, the distance vectors ($dx$ and $dy$) are adjusted by subtracting the simulation box length multiplied by the rounded ratio of the distance to the box length.
             This makes sure that each particle interacts only with the closest image of its neighbours, simulating a liquid without having to calculate an impossibly large number of interactions.
@@ -515,7 +516,16 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             The system is initialised with $N = 150$ particles.
             A reduced density of $\rho^* = 0.8$ is chosen, which dictates how big the simulation's box length should be ($L = \sqrt{N/\rho^*}$). 
             
+            Before trajectory generation can begin, the simulation environment must be established. The system is initialised with $N = 150$ particles. A target reduced density of $\rho^* = 0.8$ is chosen, which algebraically dictates the square simulation's box length ($L = \sqrt{N/\rho^*}$). 
+            
+            To prevent particles from spawning on top of one another, which would trigger infinite energy through the $1/r^{12}$ Lennard-Jones term, the particles are initialised onto a regular lattice.
+            
+            Finally, the Mersenne Twister PRNG is initialised with a fixed seed of 32005096.
+            Although testing and development used a random seed, which has been left within comments in the code, the fixed seed guarantees that random displacements and conditional acceptances can be reproducible for evaluation purposes.
+        
         \subsubsection{Post-Simulation Data Analysis}
+
+            Post simulation data analysis has been undertaken in the R programming language (see Appendix F).
     \subsection{Code Origin and Inspiration}
         My code was built on a framework of \textbf{Fortran} code from 'Understanding Molecular Simulation' by Daan Frenkel and Berend Smit \citep{Frenkel96}.
         Another Monte Carlo simulation of the Lennard-Jones model \citep{Kelter15}, packaged within a library known as NetLogo \citep{Wilensky99}, also provided much guidance and inspiration.
