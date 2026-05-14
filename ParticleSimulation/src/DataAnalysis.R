@@ -2,6 +2,8 @@
 library(ggplot2)
 
 # Setting Up Files ====
+assets <- "C://Users/rajam/OneDrive - University of Reading/THIRD YEAR/PPR/Numerical-simulation-methods-and-their-applications/assets"
+
 particle.Energy.file <- "ParticleSimulation/data/energy_data.csv"
 particle.Energy <- read.csv(particle.Energy.file, header = T)
 attach(particle.Energy)
@@ -24,7 +26,8 @@ particle.Energy.plot <- ggplot(
     theme_minimal()
 
 ## Saving
-ggsave("ParticleSimulation/data/particle_Energy_plot.png", plot = particle.Energy.plot, width = 8, height = 5)
+assets.Particle <- paste0(assets, "/particle_Energy_plot.png")
+ggsave(assets.Particle, plot = particle.Energy.plot, width = 8, height = 5)
 
 
 # Radial Distribution Function ====
@@ -38,7 +41,7 @@ rdf.Data$IdealCount <- (2 * pi * rdf.Data$Distance * bin_width) * density
 rdf.Data$g_r <- rdf.Data$Count / rdf.Data$IdealCount
 rdf.Data$g_r[is.nan(rdf.Data$g_r) | is.infinite(rdf.Data$g_r)] <- 0
 
-# Plot Radial Distribution Function
+# Plot Radial Distribution Function ====
 rdf.Data.plot <- ggplot(rdf.Data, aes(x = Distance, y = g_r)) +
     geom_line(color = "forestgreen", size = 1) +
     geom_hline(yintercept = 1, linetype = "dashed", color = "black") + # Ideal gas limit
@@ -48,4 +51,5 @@ rdf.Data.plot <- ggplot(rdf.Data, aes(x = Distance, y = g_r)) +
     theme_minimal()
 
 # Save the plot
-ggsave("ParticleSimulation/data/rdf_Data_plot.png", plot = rdf.Data.plot, width = 8, height = 5)
+assets.rdf <- paste0(assets, "/rdf_Data_plot.png")
+ggsave(assets.rdf, plot = rdf.Data.plot, width = 8, height = 5)
