@@ -27,7 +27,7 @@ particle.Energy.plot <- ggplot(
 
 ## Saving
 assets.Particle <- paste0(assets, "/particle_Energy_plot.png")
-ggsave(assets.Particle, plot = particle.Energy.plot, width = 8, height = 5)
+ggsave(assets.Particle, plot = particle.Energy.plot, width = 15, height = 8, units = "cm")
 
 
 # Radial Distribution Function ====
@@ -52,4 +52,4 @@ rdf.Data.plot <- ggplot(rdf.Data, aes(x = Distance, y = g_r)) +
 
 # Save the plot
 assets.rdf <- paste0(assets, "/rdf_Data_plot.png")
-ggsave(assets.rdf, plot = rdf.Data.plot, width = 8, height = 5)
+ggsave(assets.rdf, plot = rdf.Data.plot, width = 15, height = 8, units = "cm")
