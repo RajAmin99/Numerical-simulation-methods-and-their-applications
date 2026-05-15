@@ -34,10 +34,11 @@ ggsave(assets.Particle, plot = particle.Energy.plot, width = 15, height = 8, uni
 
 ## Simulation parameters from main code
 density <- 0.8
+N <- 150
 bin_width <- rdf.Data$Distance[2] - rdf.Data$Distance[1]
 
 # Normalize raw counts to g(r)
-rdf.Data$IdealCount <- (2 * pi * rdf.Data$Distance * bin_width) * density
+rdf.Data$IdealCount <- (2 * pi * rdf.Data$Distance * bin_width) * density * N
 rdf.Data$g_r <- rdf.Data$Count / rdf.Data$IdealCount
 rdf.Data$g_r[is.nan(rdf.Data$g_r) | is.infinite(rdf.Data$g_r)] <- 0
 

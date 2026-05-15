@@ -151,7 +151,7 @@
     
 
 \maketitle
-\vspace{20mm}
+\vspace{10mm}
 
 
 %-----------------------------------------------------------------------------------PLAIN LANGUAGE SUMMARY BEGINS
@@ -170,8 +170,10 @@ These findings consist of the total energy within the system
 and the radial distribution function.
 \vspace{2mm}
 
-What we conclude is
-
+What we conclude is that the Monte Carlo method is highly effective at mimicking physics.
+By tracking their energy, we proved that simulated particles successfully settled into a stable liquid state.
+Measuring the distances between particles showed that they clustered together exactly as expected for a fluid.
+This demonstrates that these computational techniques are powerful tools for recreating and predicting the behaviour of complex materials without needing physical experiments, or increasingly large (and cost-heavy) models.
 \end{abstract}
 
 %-----------------------------------------------------------------------------------PLAIN LANGUAGE SUMMARY ENDS
@@ -201,7 +203,6 @@ b. I acknowledge the use of \textcolor{red}{[]} to generate materials that were 
 \newpage
 
 \tableofcontents
-\newpage
 \listoftables
 \vspace*{0.05\textheight}
 \listoffigures
@@ -330,7 +331,7 @@ When initially proposed in this report, the field of Monte Carlo methods had not
 
             As, arguably, the most widely used PRNG in the modern day, the Mersenne Twister can be found in many software libraries for standard random generation. These include, but are not limited to, Python, Ruby, and R.
             One of its multiple variant forms can be used in C++ through \verb|std::mt19937| in the standard library. Due to these occurrences, it is highly likely that within code used in this report (found in the Appendices), the Mersenne Twister is the PRNG that has contributed random elements.
-            For this reason, my C++ simulation (see Appendix E) has employed the use of the mentioned Mersenne Twister.
+            For this reason, my C++ simulation (see Appendix C) has employed the use of the mentioned Mersenne Twister.
     
     \newpage
     \subsection{Sampling Methodology}
@@ -454,7 +455,7 @@ When initially proposed in this report, the field of Monte Carlo methods had not
 
         \subsubsection{Displaying The Potential Visually}
             The Lennard-Jones plot can be shown in a graphical manner, representing the various elements of the equation, as described earlier.
-            Setting $\sigma,\: \varepsilon\; =\; 0$, for simplicities sake, generates the following graph, programmed in python (see Appendix C) using, primarily, the matplotlib library \citep{Hunter07}.
+            Setting $\sigma,\: \varepsilon\; =\; 0$, for simplicities sake, generates the following graph, programmed in python (see Appendix E) using, primarily, the matplotlib library \citep{Hunter07}.
             \begin{center}
                 \includegraphics[width = 11cm, height = 11cm, keepaspectratio]{assets/LennardJonesPlot.png}
                 \captionof{figure}{\small\textbf{Lennard-Jones Potential Plot}}
@@ -532,13 +533,22 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             If $\Delta E > 0$, the move is accepted conditionally by comparing the Boltzmann weight $\exp(-\Delta E / T)$ (using reduced units where $k_B = 1$) against a generated pseudo-random number.
             This occasional acceptance of uphill energy moves allows the system to escape local energy minima and accurately sample the phase space.
         
-        \subsubsection{Post-Simulation Data Analysis}
-            During the simulation, a tracking function isolates distinct points: every 10 cycles, the total energy of the system is calculated and recorded to monitor equilibration.
-            Simultaneously, the distances between all particle pairs are sampled and tallied into histogram bins to track structural data, in order to compute the radial distribution function later on.
-            
-            Once the 5000 cycles are complete, this data is exported into \textbf{`csv'} files (see Appendices G and H).
-            Externally, programmed in R, the \verb|ggplot2| library is used to plot the data after import.
-            Statistical normalisation takes place in order to convert the raw rdf data into a radial distribution function.
+    \newpage
+    \subsection{Post-Simulation Data Analysis}
+        The majority of the post-simulation data analysis is handled in an R program (see Appendix F). 
+        During the simulation, a tracking function isolates distinct points: every 10 cycles, the total energy of the system is calculated and recorded to monitor equilibration.
+        
+        Simultaneously, the distances between all particle pairs are sampled and tallied into histogram bins to track structural data, in order to compute the \textbf{`radial distribution function'} later on.
+        The radial distribution function is a tool in statistical mechanics used to describe the internal structure of a fluid.
+        It defines the probability of finding a particle at a specific distance $r$ from a chosen reference particle, relative to the probability expected in a completely uniform, non-interacting ideal gas. 
+        
+        Physically, $g(r)$ reveals the structure of the system.
+        In crystalline solids, particles are locked in fixed lattice positions, resulting in $g(r)$ displaying an infinite series of sharp peaks.
+        In a simple liquid, however, $g(r)$ will display a few distinct peaks at short distances, representing tightly packed shells of nearest-neighbour atoms, before decaying and evaluating out to a value of $1$ at larger distances \citep{RadialDistributionFunction21}.
+        
+        Once the 5000 cycles are complete, this data is exported into \textbf{`csv'} files (see Appendices G and H).
+        Externally, programmed in R, the \verb|ggplot2| library is used to plot the data after import.
+        Statistical normalisation takes place in order to convert the raw rdf data into a radial distribution function.
     
     \subsection{Code Origin and Inspiration}
         My code was built on a framework of \textbf{Fortran} code from 'Understanding Molecular Simulation' by Daan Frenkel and Berend Smit \citep{Frenkel96}.
@@ -546,7 +556,6 @@ When initially proposed in this report, the field of Monte Carlo methods had not
         These were adapted and rewritten from scratch, by me, into \textbf{C++}.
         My program can be found in the appendix of this report (see Appendix E).
 
-\newpage
 \section{Application of Code to a Lennard-Jones liquid}
     \subsection{Total Energy in Plots}
         \begin{center}
@@ -554,18 +563,63 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             \captionof{figure}{\small\textbf{Total Energy of Simulation}}
         \end{center}
 
-    \subsection{Numerical Analysis}
-        \subsubsection{Radial Distribution Function}
-            \begin{center}
-                \includegraphics[width = 15cm, height = 8cm, keepaspectratio]{assets/rdf_Data_plot.png}
-                \captionof{figure}{\small\textbf{Radial Distribution Function}}
-            \end{center}
+        The plot above displays the total potential energy of the system across the 5000 Monte Carlo cycles.
+        Initially, the system begins with an artificial configuration because the 150 particles were specifically placed onto a uniform lattice to prevent infinite repulsion and overlap. 
+        
+        As the Metropolis algorithm begins to iterate, the system rapidly explores new microstates, causing fluctuations in the total energy.
+        Around the 1000-cycle mark, the red trendline starts to demonstrate a stabilisation of sorts, with the total energy plateauing and fluctuating steadily around the $-320$ to $-330$ reduced energy mark.
+        
+        This plateau is proof of equilibration.
+        It shows that the starting lattice has completely settled into a liquid and the system has reached a stable equilibrium corresponding to a Lennard-Jones liquid.
+        The continuous fluctuations around this plateau represent the natural thermodynamic variance of a system at equilibrium within an ensemble.
 
-        \subsubsection{Mean-Squared Displacements}
-        \subsubsection{Diffusion Coefficients}
+    \subsection{Radial Distribution Function}
+        \begin{center}
+            \includegraphics[width = 15cm, height = 8cm, keepaspectratio]{assets/rdf_Data_plot.png}
+            \captionof{figure}{\small\textbf{Radial Distribution Function}}
+        \end{center}
+
+        To analyse the structural properties of the simulated liquid, a Radial Distribution Function, $g(r)$, was computed.
+        The raw counts extracted from the C++ code were normalised in R (using the formula $2\pi r \Delta r \rho$).
+        The resulting graph demonstrates the physical characteristics of a simple liquid:
+        
+        \begin{itemize}
+            \item \textbf{The `Dead Zone' ($r < 0.9$):} For distances less than 0.9, $g(r)$ is exactly zero. This proves the successful implementation of the $1/r^{12}$ repulsion term in the code; atoms cannot physically overlap, so the probability of finding two particles this close together is zero.
+            \item \textbf{The First Coordination Shell ($r \approx 1.1$):} The massive spike just after the dead zone represents the first coordination shell. It highlights the high probability of finding a tightly packed ring of nearest-neighbour atoms clustered immediately around any given reference particle.
+            \item \textbf{Short-Range Ordering ($1.5 < r < 3.0$):} Following the first peak, the graph shows a distinct valley and a subsequent, smaller second peak. This oscillating structure demonstrates short-range ordering, proving the system is a condensed liquid rather than a completely random, structureless gas.
+            \item \textbf{Long-Range Limit ($r \to \infty$):} As distance increases, the graph flattens out and tends towards $g(r) = 1$. At these distances, the central reference particle no longer exerts any significant attractive or repulsive influence. Consequently, the local density simply equals the uniform density of the system, acting like an ideal gas. This lack of long-range order distinguishes the liquid phase from a solid crystal (which would display sharp peaks indefinitely).
+        \end{itemize}
 
 \newpage
 \section{Conclusions, Findings, Prospectives}
+    This project set out to explore numerical simulation methods, specifically focusing on the application of the Monte Carlo Metropolis algorithm to a particle-based system.
+    By using theories of statistical mechanics, importance sampling, and detailed balance, a C++ program was developed to simulate a simple Lennard-Jones liquid of 150 particles.
+    
+    The findings were routine and the simulation in question ran as expected.
+    The total energy tracking demonstrated that the algorithm correctly guided the system from an initial lattice into a stable thermodynamic equilibrium.
+    In addition to this, post-simulation data analysis conducted in R yielded a Radial Distribution Function that perfectly aligned with the theoretical structural expectations of a simple liquid.
+    
+    \subsection{Limitations and Prospectives:}
+        While the simulation did successfully model liquid behaviour, it was not without limitations.
+        The system was deliberately scaled to simulate $N=150$ particles and while this count was sufficient to demonstrate core physics behind the liquid, a system of relatively small size is inherently subject to finite-size anomalies.
+        This can even be in spite of mitigating effects of Periodic Boundary Conditions.
+        Additionally, the simulation was constrained to two dimensions, which restricts direct comparative accuracy to real-world three-dimensional bulk fluids.
+    
+        Were this done again, expanding the simulation into three dimensions would be a logical next step.
+        Dramatically increasing the particle count to observe true macroscopic thermodynamic limits would also be important.
+
+    \subsection{Broader Physical Implications:}
+        While the simulated Lennard-Jones liquid is a simplified model, the methodologies validated in this project serve as a foundation for more advanced molecular modelling.
+        The ability to derive properties, such as the radial distribution function, from fundamental pair potentials is a crucial tool in materials science.
+        As outlined in the broader scope of statistical mechanics, scaling these exact Monte Carlo principles to more complex systems allows for much without the need for costly experimentation.
+  
+    \subsection{Personal Reflections}
+    From a personal perspective, this project provided insight into theoretical research and computational physics.
+    Translating literature into C++ required a lot of technique and research, such as statistical mechanics, detailed balance and the Boltzmann distribution.
+    
+    Strategic decision-making directly lead to the choice of simulate a two-dimensional liquid rather than using a cubic lattice.
+
+    
 \newpage
 %-----------------------------------------------------------------------------------REPORT BODY ENDS
 
@@ -594,9 +648,10 @@ When initially proposed in this report, the field of Monte Carlo methods had not
             \includegraphics{assets/ApproximationOfPi_GraphicalRepresentation_Output.png}
         \end{center}
 
+    
     \newpage
-    \section{Lennard-Jones Potential, Simple Plot in Python}
-    \lstinputlisting[title=\lstname]{LennardJonesPotential/src/LennardJonesPotential.py}
+    \section{Monte Carlo C++ Code}
+    \lstinputlisting[style=customcpp, title=\lstname]{ParticleSimulation/src/main.cpp}
 
 
     \newpage
@@ -608,10 +663,9 @@ When initially proposed in this report, the field of Monte Carlo methods had not
         \small\textbf{via \citep{Wasserman04}}
     \end{flushright}
 
-
     \newpage
-    \section{Monte Carlo C++ Code}
-    \lstinputlisting[style=customcpp, title=\lstname]{ParticleSimulation/src/main.cpp}
+    \section{Lennard-Jones Potential, Simple Plot in Python}
+    \lstinputlisting[title=\lstname]{LennardJonesPotential/src/LennardJonesPotential.py}
 
     \newpage
     \section{Data Analysis R Code}
